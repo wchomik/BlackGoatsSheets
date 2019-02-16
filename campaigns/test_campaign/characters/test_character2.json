@@ -1,0 +1,36 @@
+{
+    "name": "TestCharacter2",
+    "id": "TestCharacter2",
+    "stats": {
+        "str": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        },
+        "to": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        },
+        "ag": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        },
+        "int": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        },
+        "wp": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        },
+        "fel": {
+            "initial": 30,
+            "advances": 0,
+            "current": 30
+        }
+    }
+}

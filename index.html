@@ -11,12 +11,61 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <h1>BlackGoatsSheets</h1>
+    <div id="debug">
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
+    <script src="js/main.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div class="entry">
+        <h1>{{name}}</h1>
+        <div>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              {{#each characters}}
+              <a class="nav-item nav-link {{#if @first}}active{{/if}}" id="nav-{{this.id}}-tab" data-toggle="pill" href="#nav-{{this.id}}" role="tab" aria-controls="nav-{{this.id}}" aria-selected="{{#if @first}}true{{else}}false{{/if}}">{{this.name}}</a>
+              {{/each}}
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            {{#each characters}}
+            <div class="tab-pane fade {{#if @first}}show active{{/if}}" id="nav-{{this.id}}" role="tabpanel" aria-labelledby="nav-{{this.id}}-tab">
+              <table class="table">
+                  <thead>
+                    <tr>
+                        <th scope="col">Attribute</th>
+                        <th scope="col">Initial</th>
+                        <th scope="col">Advances</th>
+                        <th scope="col">Current</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each stats}}
+                      <tr>
+                        <th scope="row">{{@key}}</th>
+                        <td>{{this.initial}}</td>
+                        <td>{{this.advances}}</td>
+                        <td>{{this.current}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </script>
+    <script>
+      addCampaign("test_campaign", "entry-template");;
+    </script>
+    
   </body>
 </html>
