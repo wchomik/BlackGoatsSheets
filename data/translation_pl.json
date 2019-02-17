@@ -1,8 +1,15 @@
 {
-    "Str": "Siła",
-    "To": "Wytrzymałość",
-    "Ag": "Zręczność",
-    "Int": "Inteligencja",
-    "Wp": "Siła Woli",
-    "Fel": "Ogłada"
+    "lang": "Język",
+    "character-sheets": "Karty Postaci",
+    "journal": "Dziennik",
+    "attribute": "Atrybut",
+    "initial": "Początkowo",
+    "advances": "Rozwinięcia",
+    "current": "Obecnie",
+    "str": "Siła",
+    "to": "Wytrzymałość",
+    "ag": "Zręczność",
+    "int": "Inteligencja",
+    "wp": "Siła Woli",
+    "fel": "Ogłada"
 }

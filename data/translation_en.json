@@ -1,8 +1,14 @@
 {
-    "Str": "Strength",
-    "To": "Toughness",
-    "Ag": "Agility",
-    "Int": "Intelligence",
-    "Wp": "Willpower",
-    "Fel": "Fellowship"
+    "lang": "Language",
+    "character-sheets": "Character Sheets",
+    "attribute": "Attribute",
+    "initial": "Initial",
+    "advances": "Advances",
+    "current": "Current",
+    "str": "Strength",
+    "to": "Toughness",
+    "ag": "Agility",
+    "int": "Intelligence",
+    "wp": "Willpower",
+    "fel": "Fellowship"
 }
