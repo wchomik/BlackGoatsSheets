@@ -5,7 +5,6 @@ function addCampaign(campaign_name, template_name) {
             data.characters = []
         $.when(
             $.each( data.character_sheets, function( val ) {
-                console.log("dupa:" + val)
                 $.getJSON("campaigns/" + campaign_name + "/characters/" + data.character_sheets[val], function(character_data) {
                     data.characters.push(character_data);
                 })
@@ -13,7 +12,7 @@ function addCampaign(campaign_name, template_name) {
         ).then(function() {
             console.log(data);
             var html    = template(data);
-            $("#debug").html(html)
+            $("#content").html(html)
         })
     });
 }
