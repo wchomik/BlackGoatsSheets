@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
     <link href="css/goat.css" rel="stylesheet">
     <title>Black Goat's Sheets</title>
   </head>
@@ -56,7 +57,7 @@
               <a class="nav-link" id="v-panes-journal-tab" data-toggle="pill" href="#v-panes-journal" role="tab" aria-controls="v-panes-journal" aria-selected="false" i18nid="journal"></a>
             </div>
           </div>
-          <div class="col-10 card">
+          <div class="col-10">
             <div class="tab-content" id="v-panes-tabContent">
               <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
                 <nav>
@@ -67,28 +68,58 @@
                   </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                  {{#each characters}}
+                  {{#each characters as |character character_index|}}
                   <div class="tab-pane fade {{#if @first}}show active{{/if}}" id="nav-{{this.id}}" role="tabpanel" aria-labelledby="nav-{{this.id}}-tab">
-                    <table class="table">
-                        <thead>
-                          <tr>
-                              <th scope="col" i18nid="attribute"></th>
-                              <th scope="col" i18nid="initial"></th>
-                              <th scope="col" i18nid="advances"></th>
-                              <th scope="col" i18nid="current"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {{#each stats}}
+                    <div class="row">
+                      <div class="col-6"><div class="card"><div class="card-body">
+                        <table class="table table-bordered table-striped">
+                          <thead>
                             <tr>
-                              <th scope="row" i18nid="{{@key}}"></th>
-                              <td>{{this.initial}}</td>
-                              <td>{{this.advances}}</td>
-                              <td>{{this.current}}</td>
+                                <th scope="col" i18nid="main_profile_stats"></th>
+                                <th scope="col" i18nid="starting"></th>
+                                <th scope="col" i18nid="advance"></th>
+                                <th scope="col" i18nid="taken"></th>
+                                <th scope="col" i18nid="current"></th>
                             </tr>
-                          {{/each}}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody>
+                            {{#each stats.main}}
+                              <tr>
+                                <th scope="row" i18nid="{{@key}}"></th>
+                                <td>{{this.starting}}</td>
+                                <td>+{{this.advance}}</td>
+                                <td>{{this.taken}}</td>
+                                <td>{{this.current}}</td>
+                              </tr>
+                            {{/each}}
+                          </tbody>
+                        </table>
+                      </div></div></div>
+                      <div class="col-6"><div class="card"><div class="card-body">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                                <th scope="col" i18nid="secondary_profile_stats"></th>
+                                <th scope="col" i18nid="starting"></th>
+                                <th scope="col" i18nid="advance"></th>
+                                <th scope="col" i18nid="taken"></th>
+                                <th scope="col" i18nid="current"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {{#each stats.secondary}}
+                              <tr>
+                                <th scope="row" i18nid="{{@key}}"></th>
+                                {{#if this.derived}}<td derived="{{character_index}}|{{this.derived}}"></td>{{else}}<td>{{this.starting}}</td>{{/if}}
+                                {{#if this.no_advance}}<td class="table-light"></td>{{else}}<td>+{{this.advance}}</td>{{/if}}
+                                {{#if this.no_advance}}<td class="table-light"></td>{{else}}<td>{{this.taken}}</td>{{/if}}
+                                <td>{{this.current}}</td>
+                              </tr>
+                            {{/each}}
+                          </tbody>
+                        </table>
+                      </div></div></div>
+                    </div>
                   </div>
                   {{/each}}
                 </div>

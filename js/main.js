@@ -30,12 +30,6 @@ $("[translate]").each(function (){
     })
 })
 
-Handlebars.registerHelper('bold', function(options) {
-    return new Handlebars.SafeString(
-        '<div class="mybold">'
-        + options.fn(this)
-        + '</div>');
-});
 
 var source   = document.getElementById("goat-template").innerHTML;
 var template = Handlebars.compile(source);
@@ -44,31 +38,51 @@ var campaign = {
     "commits": []
 }
 
+function calc_derived() {
+    $("[derived]").each(function (){
+        var character_path = $(this).attr("derived")
+        var tokens = character_path.split("|")
+        var val = campaign.characters[tokens[0]]
+        console.log(val)
+        for (i = 1; i < tokens.length; i++) {
+            val = val[tokens[i]]
+        }
+        $(this).text(parseInt(val/10))
+    })
+}
+
 function addCampaign(repo_address) {
     //https://github.com/wchomik/BGS-testcampaing
     //https://github.com/wchomik/BGS-testcampaing/blob/master/campaign.json
     //https://raw.githubusercontent.com/wchomik/BGS-testcampaing/master/campaign.json
     //https://api.github.com/repos/wchomik/BGS-testcampaing/commits
-    raw = repo_address.replace("github.com", "raw.githubusercontent.com") + "/master/"
+    raw = repo_address.replace("github.com", "raw.githubusercontent.com") + "/develop/"
     api = repo_address.replace("github.com", "api.github.com/repos") + "/commits"
-    $.getJSON( raw + "campaign.json", function( data ) {
-        campaign = {...campaign, ...data}
-        $.each( campaign.character_sheets, function( val ) {
-            $.getJSON(raw + "characters/" + campaign.character_sheets[val], function(character_data) {
-                //This needs to be changed so template is generated once everything loaded
-                campaign.characters.push(character_data);
-                var html    = template(campaign);
-                $("#content").html(html);
-                translate(current_lang)
+    $.ajax({
+        url: raw + "campaign.json",
+        cache: false,
+        dataType: 'json',
+        success: function( data ) {
+            campaign = {...campaign, ...data}
+            $.each( campaign.character_sheets, function( val ) {
+                $.getJSON(raw + "characters/" + campaign.character_sheets[val], function(character_data) {
+                    //This needs to be changed so template is generated once everything loaded
+                    campaign.characters.push(character_data);
+                    var html    = template(campaign);
+                    $("#content").html(html);
+                    calc_derived();
+                    translate(current_lang);
+                });
             });
-        });
+        }
     });
     $.getJSON(api, function(commits) {
         //This needs to be changed so template is generated once everything loaded
         campaign.commits = commits
         var html    = template(campaign);
         $("#content").html(html);
-        translate(current_lang)
+        calc_derived();
+        translate(current_lang);
     });
 }
 
