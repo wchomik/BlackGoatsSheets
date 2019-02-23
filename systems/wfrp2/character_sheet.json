@@ -1,0 +1,240 @@
+{
+    "stats": {
+        "main": {
+            "weapon": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "ballistic": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "strength": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "toughness": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "agility": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "intelligence": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "will": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "fellowship": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            }
+        },
+        "secondary": {
+            "attacks": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "wounds": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "strength_bonus": {
+                "no_advance": true,
+                "derived": "stats|main|strength[current]"
+            },
+            "toughness_bonus": {
+                "no_advance": true,
+                "derived": "stats|main|toughness[current]"
+            },
+            "movement": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "magic": {
+                "starting": "",
+                "advance": "",
+                "taken": "",
+                "current": ""
+            },
+            "insanity_points": {
+                "no_advance": true
+            },
+            "fate_points": {
+                "no_advance": true
+            }
+        }
+    },
+    "skills": {
+        "basic": {
+            "animal_care": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "charm": {
+                "characteristic": "stats|main|fellowship[current]"
+            },
+            "command": {
+                "characteristic": "stats|main|fellowship[current]"
+            },
+            "concealment": {
+                "characteristic": "stats|main|agility[current]"
+            },
+            "consume_alcohol": {
+                "characteristic": "stats|main|toughness[current]"
+            },
+            "disguise": {
+                "characteristic": "stats|main|fellowship[current]"
+            },
+            "drive": {
+                "characteristic": "stats|main|strength[current]"
+            },
+            "evaluate": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "gamble": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "gossip": {
+                "characteristic": "stats|main|fellowship[current]"
+            },
+            "haggle": {
+                "characteristic": "stats|main|fellowship[current]"
+            },
+            "intimidate": {
+                "characteristic": "stats|main|strength[current]"
+            },
+            "outdoor_survival": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "perception": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "ride": {
+                "characteristic": "stats|main|agility[current]"
+            },
+            "row": {
+                "characteristic": "stats|main|strength[current]"
+            },
+            "scale_sheer_surface": {
+                "characteristic": "stats|main|strength[current]"
+            },
+            "search": {
+                "characteristic": "stats|main|intelligence[current]"
+            },
+            "silent_move": {
+                "characteristic": "stats|main|agility[current]"
+            },
+            "swim": {
+                "characteristic": "stats|main|strength[current]"
+            }
+        },
+        "advanced": {
+            "academic_knowledge": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "animal_training": {
+				"characteristic": "stats|main|fellowship[current]"
+			},
+            "blather": {
+				"characteristic": "stats|main|fellowship[current]"
+			},
+            "channelling": {
+				"characteristic": "stats|main|will[current]"
+			},
+            "charm_animal": {
+				"characteristic": "stats|main|fellowship[current]"
+			},
+            "common_knowledge": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "dodge_blow": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "follow_trail": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "heal": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "hypnotism": {
+				"characteristic": "stats|main|will[current]"
+			},
+            "lip_reading": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "magical_sense": {
+				"characteristic": "stats|main|will[current]"
+			},
+            "navigation": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "performer": {
+				"characteristic": "stats|main|fellowship[current]"
+			},
+            "pick_lock": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "prepare_poison": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "readwrite": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "sail": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "secret_language": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "secret_signs": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "set_trap": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "shadowing": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "sleight_of_hand": {
+				"characteristic": "stats|main|agility[current]"
+			},
+            "speak_language": {
+				"characteristic": "stats|main|intelligence[current]"
+			},
+            "torture": {
+				"characteristic": "stats|main|fellowship[current]"
+			},
+            "trade": {
+            },
+            "ventriloquism": {
+				"characteristic": "stats|main|fellowship[current]"
+			}
+        }
+    }
+}
