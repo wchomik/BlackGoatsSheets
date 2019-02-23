@@ -26,7 +26,7 @@ function process_character_sheet(character) {
     character.stats.secondary.fate_points.advance = "disabled";
     character.stats.secondary.fate_points.taken = "disabled";
 
-    var basic_skills = {
+    var skills = {
         "animal_care": "stats|main|intelligence[current]",
         "charm": "stats|main|fellowship[current]",
         "command": "stats|main|fellowship[current]",
@@ -47,8 +47,6 @@ function process_character_sheet(character) {
         "search": "stats|main|intelligence[current]",
         "silent_move": "stats|main|agility[current]",
         "swim": "stats|main|strength[current]",
-    };
-    var advanced_skills = {
         "academic_knowledge": "stats|main|intelligence[current]",
         "animal_training": "stats|main|fellowship[current]",
         "blather": "stats|main|fellowship[current]",
@@ -76,37 +74,42 @@ function process_character_sheet(character) {
         "torture": "stats|main|fellowship[current]",
         "trade": "stats|main|intelligence[current]",
         "ventriloquism": "stats|main|fellowship[current]",
+    };
+    var skill_types = ["basic", "advanced"];
+    for(var skill_type in skill_types) {
+        for(var name in character.skills[skill_types[skill_type]]) {
+            var skill = jspath(character, skills[name])
+            var current = 0;
+            if(character.skills[skill_types[skill_type]][name] == 0) {
+                if(skill_types[skill_type] == "basic") {
+                    current = Math.ceil(skill.value / 2)
+                } else {
+                    current = 0
+                }
+            } else {
+                current = skill.value + character.skills[skill_types[skill_type]][name] * 10
+            }
+            character.skills[skill_types[skill_type]][name] = {
+                "current": current,
+                "taken": character.skills[skill_types[skill_type]][name]
+            }
+        }
     }
-    for(var name in character.skills.basic) {
-        var skill = jspath(character, basic_skills[name])
-        console.log(skill)
-        var current = 0;
-        if(character.skills.basic[name] == 0) {
-            current = Math.ceil(skill.value / 2)
-        } else {
-            current = skill.value + character.skills.basic[name] * 10
-        }
-        character.skills.basic[name] = {
-            "current": current,
-            "taken": character.skills.basic[name]
-        }
-        console.log(character.skills.basic[name])
-    }
-    for(var name in character.skills.advanced) {
-        var skill = jspath(character, advanced_skills[name])
-        console.log(skill)
-        var current = 0;
-        if(character.skills.advanced[name] == 0) {
-            current = Math.ceil(skill.value / 2)
-        } else {
-            current = skill.value + character.skills.advanced[name] * 10
-        }
-        character.skills.advanced[name] = {
-            "current": current,
-            "taken": character.skills.advanced[name]
-        }
-        console.log(character.skills.advanced[name])
-    }
+    // for(var name in character.skills.advanced) {
+    //     var skill = jspath(character, advanced_skills[name])
+    //     console.log(skill)
+    //     var current = 0;
+    //     if(character.skills.advanced[name] == 0) {
+    //         current = Math.ceil(skill.value / 2)
+    //     } else {
+    //         current = skill.value + character.skills.advanced[name] * 10
+    //     }
+    //     character.skills.advanced[name] = {
+    //         "current": current,
+    //         "taken": character.skills.advanced[name]
+    //     }
+    //     console.log(character.skills.advanced[name])
+    // }
     // for(var k in character.skills.basic){
     //     var skill_val = character.skills.basic[k]
     //     var characteristic = template_sheet.skills.basic[k].characteristic
