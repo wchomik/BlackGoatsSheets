@@ -1,5 +1,8 @@
 
 {
+    "lang": "Language",
+    "campaign": "Campaign",
+    "character-sheets": "Character Sheets",
     "journal": "Journal",
     "show": "Show",
     "main_profile_stats": "Main Profile Stats",

@@ -1,139 +1,147 @@
 <div id="bgsappid" class="container-fluid">
   <h1>{{ name }}</h1>
-  <div class="row">
-
-    <div class="col-2">
-      <div class="nav flex-column nav-pills" id="v-panes-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translations[lang]['character-sheets'] }}</a>
-        <a class="nav-link" id="v-panes-journal-tab" data-toggle="pill" href="#v-panes-journal" role="tab" aria-controls="v-panes-journal" aria-selected="false">{{ translations[lang]['journal'] }}</a>
-      </div>
-    </div>
-    <div class="col-10">
-      <div class="tab-content" id="v-panes-tabContent">
-        <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
-          <nav>
-            <div class="nav nav-pills" id="nav-tab" role="tablist">
-              <a v-for="(character, index) in characters"
-                class="nav-item nav-link"
-                v-bind:class="{ active: index === 0 }"
-                aria-selected="index === 0 ? 'true' : 'false'"
-                v-bind:id="'nav-tab-' + character.id"
-                v-bind:href="'#nav-' + character.id"
-                v-bind:aria-controls="'nav-' + character.id"
-                data-toggle="pill" role="tab">{{ character.name }}</a>
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translations[lang]['character-sheets'] }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="v-panes-journal-tab" data-toggle="pill" href="#v-panes-journal" role="tab" aria-controls="v-panes-journal" aria-selected="false">{{ translations[lang]['journal'] }}</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="v-panes-tabContent">
+    <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
+      <nav>
+        <div class="nav nav-pills" id="nav-tab" role="tablist">
+          <a v-for="(character, index) in characters"
+            class="nav-item nav-link"
+            v-bind:class="{ active: index === 0 }"
+            aria-selected="index === 0 ? 'true' : 'false'"
+            v-bind:id="'nav-tab-' + character.id"
+            v-bind:href="'#nav-' + character.id"
+            v-bind:aria-controls="'nav-' + character.id"
+            data-toggle="pill" role="tab">{{ character.name }}</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div v-for="(character, index) in characters"
+          class="tab-pane fade"
+          v-bind:class="{ 'show active': index === 0 }"
+          v-bind:id="'nav-' + character.id"
+          aria-labelledby="'nav-tab-' + character.id"
+          role="tabpanel">
+          <div class="row">
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translations[lang]['main_profile_stats'] }}</th>
+                    <th scope="col">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(stat, key) in character.stats.main">
+                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <td>{{stat.starting}}</td>
+                    <td>+{{stat.advance}}</td>
+                    <td>{{stat.taken}}</td>
+                    <td>{{stat.current}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
             </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div v-for="(character, index) in characters"
-              class="tab-pane fade"
-              v-bind:class="{ 'show active': index === 0 }"
-              v-bind:id="'nav-' + character.id"
-              aria-labelledby="'nav-tab-' + character.id"
-              role="tabpanel">
-              <div class="row">
-                <div class="col-6"><div class="card"><div class="card-body">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">{{ translations[lang]['main_profile_stats'] }}</th>
-                        <th scope="col">{{ translations[lang]['starting'] }}</th>
-                        <th scope="col">{{ translations[lang]['advance'] }}</th>
-                        <th scope="col">{{ translations[lang]['taken'] }}</th>
-                        <th scope="col">{{ translations[lang]['current'] }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(stat, key) in character.stats.main">
-                        <th scope="row">{{ translations[lang][key] }}</th>
-                        <td>{{stat.starting}}</td>
-                        <td>+{{stat.advance}}</td>
-                        <td>{{stat.taken}}</td>
-                        <td>{{stat.current}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div></div></div>
-                <div class="col-6"><div class="card"><div class="card-body">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">{{ translations[lang]['secondary_profile_stats'] }}</th>
-                        <th scope="col">{{ translations[lang]['starting'] }}</th>
-                        <th scope="col">{{ translations[lang]['advance'] }}</th>
-                        <th scope="col">{{ translations[lang]['taken'] }}</th>
-                        <th scope="col">{{ translations[lang]['current'] }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(stat, key) in character.stats.secondary">
-                        <th scope="row">{{ translations[lang][key] }}</th>
-                        <!-- {{if this.derived}}<td derived="{{character_index}}|{{this.derived}}"></td>{{else}}{{/if}} -->
-                        <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
-                        <!-- {{if this.no_advance}}<td class="table-light"></td>{{else}}{{/if}} -->
-                        <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
-                        <!-- {{if this.no_advance}}<td class="table-light"></td>{{else}}{{/if}} -->
-                        <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
-                        <td>{{ stat.current }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div></div></div>
-              </div>
-              <div class="row">
-                <div class="col-6"><div class="card"><div class="card-body">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" scope="col">{{ translations[lang]['basic'] }}</th>
-                        <th class="text-center" scope="col">{{ translations[lang]['taken'] }}</th>
-                        <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(skill, key) in character.skills.basic">
-                        <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
-                        <td>{{ skill.taken }}</td>
-                        <td>{{ skill.current }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div></div></div>
-                <div class="col-6"><div class="card"><div class="card-body">
-                  <table class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center" scope="col">{{ translations[lang]['advanced'] }}</th>
-                        <th class="text-center" scope="col">{{ translations[lang]['teken'] }}</th>
-                        <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(skill, key) in character.skills.advanced">
-                        <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
-                        <td>{{ skill.taken }}</td>
-                        <td>{{ skill.current }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div></div></div>
-              </div>
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translations[lang]['secondary_profile_stats'] }}</th>
+                    <th scope="col">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(stat, key) in character.stats.secondary">
+                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
+                    <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
+                    <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
+                    <td>{{ stat.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['basic'] }}</th>
+                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(skill, key) in character.skills.basic">
+                    <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
+                    <td class="min">
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"></div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"></div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"></div>
+                    </td>
+                    <td class="min">{{ skill.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['advanced'] }}</th>
+                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(skill, key) in character.skills.advanced">
+                    <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
+                    <td class="min">
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"></div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"></div>
+                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"></div>
+                    </td>
+                    <td class="min">{{ skill.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="v-panes-journal" role="tabpanel" aria-labelledby="v-panes-journal-tab">
-          <ul class="list-group">
-            <li v-for="commit in commits" class="list-group-item">
-              <div class="row">
-                <div class="col-3">{{commit.commit.committer.date}}</div>
-                <div class="col-7">{{commit.commit.message}}</div>
-                <div class="col-2">
-                  <a class="btn btn-primary justify-content-md-center" target="_blank" rel="noopener noreferrer" v-bind:href="commit.html_url" role="button">{{ translations[lang]['show'] }}</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
+    </div>
+    <div class="tab-pane fade" id="v-panes-journal" role="tabpanel" aria-labelledby="v-panes-journal-tab">
+      <ul class="list-group">
+        <li v-for="commit in commits" class="list-group-item">
+          <div class="row">
+            <div class="col-3">{{commit.commit.committer.date}}</div>
+            <div class="col-7">{{commit.commit.message}}</div>
+            <div class="col-2">
+              <a class="btn btn-primary justify-content-md-center" target="_blank" rel="noopener noreferrer" v-bind:href="commit.html_url" role="button">{{ translations[lang]['show'] }}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
@@ -156,7 +164,7 @@
         success: function( data ) {
             campaign_data = {...campaign_data, ...data}
 
-            var bgsappid = new Vue({
+            vue_apps.bgsappid = new Vue({
             el: '#bgsappid',
                 data: campaign_data
             })

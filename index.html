@@ -18,18 +18,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="campaign_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i18nid="campaign"></a>
+            <div class="dropdown-menu" aria-labelledby="campaign_selector">
+            </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i18nid="lang"></a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="nav-link dropdown-toggle" href="#" id="lang_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i18nid="lang"></a>
+            <div class="dropdown-menu" aria-labelledby="lang_selector">
               <a class="dropdown-item" href="#" translate="en">English</a>
               <a class="dropdown-item" href="#" translate="pl">Polski</a>
             </div>
@@ -37,7 +33,7 @@
         </ul>
       </div>
     </nav>
-    <main id="content" role="main" class="container-fluid"></main>
+    <main id="content" role="main" class="container-fluid tab-content"></main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
@@ -48,6 +44,7 @@
     <script src="js/main.js"></script>
     <script>
       addCampaign("https://github.com/wchomik/BGS-testcampaing", "wfrp2");
+      //addCampaign("https://github.com/wchomik/BGS-testcampaing", "wfrp2");
     </script>
   </body>
 </html>

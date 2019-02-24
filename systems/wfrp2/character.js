@@ -81,6 +81,7 @@ function process_character_sheet(character) {
             var skill = jspath(character, skills[name])
             var current = 0;
             if(character.skills[skill_types[skill_type]][name] == 0) {
+                explanation = skill
                 if(skill_types[skill_type] == "basic") {
                     current = Math.ceil(skill.value / 2)
                 } else {
