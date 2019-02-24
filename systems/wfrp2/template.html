@@ -93,9 +93,9 @@
                   <tr v-for="(skill, key) in character.skills.basic">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
                     <td class="min">
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"></div>
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"></div>
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
                     </td>
                     <td class="min">{{ skill.current }}</td>
                   </tr>
@@ -116,9 +116,9 @@
                   <tr v-for="(skill, key) in character.skills.advanced">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
                     <td class="min">
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"></div>
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"></div>
-                        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
                     </td>
                     <td class="min">{{ skill.current }}</td>
                   </tr>
