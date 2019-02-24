@@ -6,3 +6,8 @@ td.min {
     width: 1%;
     white-space: nowrap;
 }
+
+@media print {
+    @page { size: auto;  margin: 0mm; }
+    /* body { margin: 1.6cm; } */
+}

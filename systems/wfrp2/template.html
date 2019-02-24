@@ -1,6 +1,6 @@
 <div id="bgsappid" class="container-fluid">
-  <h1>{{ name }}</h1>
-  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <h1 class="d-print-none">{{ name }}</h1>
+  <ul class="nav nav-pills mb-3 d-print-none" id="pills-tab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translations[lang]['character-sheets'] }}</a>
     </li>
@@ -10,7 +10,7 @@
   </ul>
   <div class="tab-content" id="v-panes-tabContent">
     <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
-      <nav>
+      <nav class="d-print-none">
         <div class="nav nav-pills" id="nav-tab" role="tablist">
           <a v-for="(character, index) in characters"
             class="nav-item nav-link"
@@ -157,23 +157,17 @@
 
     raw = repo_url.replace("github.com", "raw.githubusercontent.com") + "/develop/"
     api = repo_url.replace("github.com", "api.github.com/repos") + "/commits"
-    $.ajax({
-        url: raw + "campaign.json",
-        cache: false,
-        dataType: 'json',
-        success: function( data ) {
-            campaign_data = {...campaign_data, ...data}
 
-            vue_apps.bgsappid = new Vue({
-            el: '#bgsappid',
-                data: campaign_data
-            })
+    campaings.bgsappid = {...campaign_data, ...campaings.bgsappid}
 
-            $.each( campaign_data.character_sheets, function( val ) {
-                $.getJSON(raw + "characters/" + campaign_data.character_sheets[val], function(character_data) {
-                    campaign_data.characters.push(process_character_sheet(character_data));
-                });
-            });
-        }
+    vue_apps.bgsappid = new Vue({
+    el: '#bgsappid',
+        data: campaings.bgsappid
+    })
+
+    $.each( campaings.bgsappid.character_sheets, function( val ) {
+        $.getJSON(raw + "characters/" + campaings.bgsappid.character_sheets[val], function(character_data) {
+          campaings.bgsappid.characters.push(process_character_sheet(character_data));
+        });
     });
 </script>

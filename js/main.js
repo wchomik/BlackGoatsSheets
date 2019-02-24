@@ -23,22 +23,37 @@ function jspath(obj, path) {
     }
 }
 
-var campaign_id = 0;
+var campaign_id_seq = 0;
 var vue_apps = {};
-function addCampaign(repo_address, system) {
+var campaings = {};
+function addCampaign(repo_address) {
+    var campaign_id = campaign_id_seq++;
+    var bgsappid = "bgsapp" + campaign_id
+
+    raw = repo_address.replace("github.com", "raw.githubusercontent.com") + "/develop/"
     $.ajax({
-        url: "systems/" + system + "/template.html",
-        cache: true,
-        async: true,
-        success: function(data) {
-            //template_cache[system] = Handlebars.compile(data);
-            var html = data.replace(/bgsappid/g, "bgsapp" + campaign_id)
-            html = html.replace(/bgsrepourl/g, repo_address); 
-            $("#content").html('<div class="tab-pane fade ' + (campaign_id == 0 ? " show active": "") + '" id="campaign' + campaign_id + '" role="tabpanel" aria-labelledby="campaign' + campaign_id + '-tab">' + html + '</div>');
-            campaign_id++;
-        }               
+        url: raw + "campaign.json",
+        cache: false,
+        dataType: 'json',
+        success: function( campaign_data ) {
+            var tab_id = "campaign" + campaign_id + "-tab";
+            var panel_id = "campaign" + campaign_id + "-panel";
+
+            $("#campaign_selector_div").append('<a id="' + tab_id + '" class="dropdown-item' + (campaign_id == 0 ? " active": "") + '" data-toggle="tab" role="tab" href="#' + panel_id + '" aria-controls="' + panel_id + '" aria-selected="' + (campaign_id == 0 ? "true": "false") + '">' + campaign_data.name + '</a>');
+            campaings[bgsappid] = campaign_data
+            $.ajax({
+                url: "systems/" + campaign_data.system + "/template.html",
+                cache: true,
+                success: function(template_data) {
+                    //template_cache[system] = Handlebars.compile(data);
+                    var html = template_data.replace(/bgsappid/g, bgsappid)
+                    html = html.replace(/bgsrepourl/g, repo_address); 
+                    $("#content").append('<div class="tab-pane fade' + (campaign_id == 0 ? " show active": "") + '" id="' + panel_id + '" role="tabpanel" aria-labelledby="' + tab_id + '">' + html + '</div>');
+                }               
+            });
+        }
     });
-    return 0;
+    return bgsappid;
 }
 
 var translations = {};
