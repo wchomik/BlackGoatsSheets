@@ -1,0 +1,173 @@
+<div id="bgsappid" class="container-fluid">
+  <h1 class="d-print-none">{{ name }}</h1>
+  <ul class="nav nav-pills mb-3 d-print-none" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translations[lang]['character-sheets'] }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="v-panes-journal-tab" data-toggle="pill" href="#v-panes-journal" role="tab" aria-controls="v-panes-journal" aria-selected="false">{{ translations[lang]['journal'] }}</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="v-panes-tabContent">
+    <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
+      <nav class="d-print-none">
+        <div class="nav nav-pills" id="nav-tab" role="tablist">
+          <a v-for="(character, index) in characters"
+            class="nav-item nav-link"
+            v-bind:class="{ active: index === 0 }"
+            aria-selected="index === 0 ? 'true' : 'false'"
+            v-bind:id="'nav-tab-' + character.id"
+            v-bind:href="'#nav-' + character.id"
+            v-bind:aria-controls="'nav-' + character.id"
+            data-toggle="pill" role="tab">{{ character.name }}</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div v-for="(character, index) in characters"
+          class="tab-pane fade"
+          v-bind:class="{ 'show active': index === 0 }"
+          v-bind:id="'nav-' + character.id"
+          aria-labelledby="'nav-tab-' + character.id"
+          role="tabpanel">
+          <div class="row">
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translations[lang]['main_profile_stats'] }}</th>
+                    <th scope="col">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(stat, key) in character.stats.main">
+                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <td>{{stat.starting}}</td>
+                    <td>+{{stat.advance}}</td>
+                    <td>{{stat.taken}}</td>
+                    <td>{{stat.current}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translations[lang]['secondary_profile_stats'] }}</th>
+                    <th scope="col">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(stat, key) in character.stats.secondary">
+                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
+                    <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
+                    <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
+                    <td>{{ stat.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['basic'] }}</th>
+                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(skill, key) in character.skills.basic">
+                    <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
+                    <td class="min">
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
+                    </td>
+                    <td class="min">{{ skill.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+            <div class="col-6">
+            <!-- <div class="card"><div class="card-body"> -->
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['advanced'] }}</th>
+                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(skill, key) in character.skills.advanced">
+                    <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
+                    <td class="min">
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
+                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
+                    </td>
+                    <td class="min">{{ skill.current }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- </div></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="v-panes-journal" role="tabpanel" aria-labelledby="v-panes-journal-tab">
+      <ul class="list-group">
+        <li v-for="commit in commits" class="list-group-item">
+          <div class="row">
+            <div class="col-3">{{commit.commit.committer.date}}</div>
+            <div class="col-7">{{commit.commit.message}}</div>
+            <div class="col-2">
+              <a class="btn btn-primary justify-content-md-center" target="_blank" rel="noopener noreferrer" v-bind:href="commit.html_url" role="button">{{ translations[lang]['show'] }}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="systems/wfrp2/character.js"></script>
+<script>
+    var repo_url = "bgsrepourl";
+    var campaign_data = {
+        "lang": "pl",
+        "translations": translations,
+        "characters": [],
+        "commits": []
+    }
+
+    raw = repo_url.replace("github.com", "raw.githubusercontent.com") + "/develop/"
+    api = repo_url.replace("github.com", "api.github.com/repos") + "/commits"
+
+    campaings.bgsappid = {...campaign_data, ...campaings.bgsappid}
+
+    vue_apps.bgsappid = new Vue({
+    el: '#bgsappid',
+        data: campaings.bgsappid
+    })
+
+    $.each( campaings.bgsappid.character_sheets, function( val ) {
+        $.getJSON(raw + "characters/" + campaings.bgsappid.character_sheets[val], function(character_data) {
+          campaings.bgsappid.characters.push(process_character_sheet(character_data));
+        });
+    });
+</script>
