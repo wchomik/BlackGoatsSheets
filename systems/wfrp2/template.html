@@ -30,7 +30,45 @@
           aria-labelledby="'nav-tab-' + character.id"
           role="tabpanel">
           <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+              <table class="table table-bordered table-striped">
+                <tbody>
+                  <tr><th scope="row">{{ translations[lang]["name"] }}:</th><td>{{ character.name }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["race"] }}:</th><td>{{ character.race }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["sex"] }}:</th><td>{{ character.sex }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["age"] }}:</th><td>{{ character.age }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["height"] }}:</th><td>{{ character.height }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["weight"] }}:</th><td>{{ character.weight }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["eyes"] }}:</th><td>{{ character.eyes }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["hair"] }}:</th><td>{{ character.hair }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["distinguishing_marks"] }}:</th><td>{{ character.distinguishing_marks }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+              <table class="table table-bordered table-striped">
+                <tbody>
+                  <tr><th scope="row">{{ translations[lang]["career"] }}:</th><td>{{ character.career }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["career_path"] }}:</th><td>{{ character.career_path }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["family"] }}:</th><td>{{ character.family }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["birthplace"] }}:</th><td>{{ character.birthplace }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["religion"] }}:</th><td>{{ character.religion }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["star_sign"] }}:</th><td>{{ character.star_sign }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+              <table class="table table-bordered table-striped">
+                <tbody>
+                  <tr><th scope="row">{{ translations[lang]["disorders"] }}:</th><td>{{ character.disorders }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["scars"] }}:</th><td>{{ character.scars }}</td></tr>
+                  <tr><th scope="row">{{ translations[lang]["background"] }}:</th><td>{{ character.background }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
             <!-- <div class="card"><div class="card-body"> -->
               <table class="table table-bordered table-striped">
                 <thead>
@@ -54,8 +92,7 @@
               </table>
             <!-- </div></div> -->
             </div>
-            <div class="w-100 d-none d-sm-block d-md-none"></div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
             <!-- <div class="card"><div class="card-body"> -->
               <table class="table table-bordered table-striped">
                 <thead>
@@ -81,9 +118,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
             <!-- <div class="card"><div class="card-body"> -->
-              <table class="table table-bordered table-striped">
+              <table class="table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center" scope="col" colspan="2">{{ translations[lang]['basic'] }}</th>
@@ -93,10 +130,11 @@
                 <tbody>
                   <tr v-for="(skill, key) in character.skills.basic">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
-                    <td class="min">
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
+                    <td style="min-width: 100px">
+                      <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
+                      <div class="progress">
+                        <div class="progress-bar" class="d-print-none" role="progressbar" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'"v-bind:aria-valuenow="skill.taken" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
                     </td>
                     <td class="min">{{ skill.current }}</td>
                   </tr>
@@ -104,10 +142,9 @@
               </table>
             <!-- </div></div> -->
             </div>
-            <div class="w-100 d-none d-sm-block d-md-none"></div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
             <!-- <div class="card"><div class="card-body"> -->
-              <table class="table table-bordered table-striped">
+              <table class="table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center" scope="col" colspan="2">{{ translations[lang]['advanced'] }}</th>
@@ -117,10 +154,11 @@
                 <tbody>
                   <tr v-for="(skill, key) in character.skills.advanced">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
-                    <td class="min">
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 1"><label class="custom-control-label" for="customCheck1"></label></div>
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 2"><label class="custom-control-label" for="customCheck1"></label></div>
-                        <div class="custom-control-inline custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" disabled v-bind:checked=" skill.taken >= 3"><label class="custom-control-label" for="customCheck1"></label></div>
+                    <td style="min-width: 100px">
+                      <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'" v-bind:aria-valuenow="skill.taken" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
                     </td>
                     <td class="min">{{ skill.current }}</td>
                   </tr>
