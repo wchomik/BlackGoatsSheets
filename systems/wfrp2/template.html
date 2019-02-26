@@ -73,16 +73,16 @@
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">{{ translations[lang]['main_profile_stats'] }}</th>
-                    <th scope="col">{{ translations[lang]['starting'] }}</th>
-                    <th scope="col">{{ translations[lang]['advance'] }}</th>
-                    <th scope="col">{{ translations[lang]['taken'] }}</th>
-                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['main_profile_stats'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['current'] }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(stat, key) in character.stats.main">
-                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <th scope="row"><span class="d-none d-lg-inline">{{ translations[lang][key] }} </span><span class="badge badge-primary">{{ translations[lang]["_"+key] }}</span></th>
                     <td>{{stat.starting}}</td>
                     <td>+{{stat.advance}}</td>
                     <td>{{stat.taken}}</td>
@@ -97,16 +97,16 @@
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">{{ translations[lang]['secondary_profile_stats'] }}</th>
-                    <th scope="col">{{ translations[lang]['starting'] }}</th>
-                    <th scope="col">{{ translations[lang]['advance'] }}</th>
-                    <th scope="col">{{ translations[lang]['taken'] }}</th>
-                    <th scope="col">{{ translations[lang]['current'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['secondary_profile_stats'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['starting'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['advance'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['taken'] }}</th>
+                    <th scope="col" class="small">{{ translations[lang]['current'] }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(stat, key) in character.stats.secondary">
-                    <th scope="row">{{ translations[lang][key] }}</th>
+                    <th scope="row"><span class="d-none d-lg-inline">{{ translations[lang][key] }} </span><span class="badge badge-primary">{{ translations[lang]["_"+key] }}</span></th>
                     <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
                     <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
@@ -123,8 +123,8 @@
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['basic'] }}</th>
-                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                    <th class="text-center small" scope="col" colspan="2">{{ translations[lang]['basic'] }}</th>
+                    <th class="text-center small" scope="col">{{ translations[lang]['current'] }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -147,8 +147,8 @@
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center" scope="col" colspan="2">{{ translations[lang]['advanced'] }}</th>
-                    <th class="text-center" scope="col">{{ translations[lang]['current'] }}</th>
+                    <th class="text-center small" scope="col" colspan="2">{{ translations[lang]['advanced'] }}</th>
+                    <th class="text-center small" scope="col">{{ translations[lang]['current'] }}</th>
                   </tr>
                 </thead>
                 <tbody>
