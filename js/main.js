@@ -30,7 +30,7 @@ function addCampaign(repo_address) {
     var campaign_id = campaign_id_seq++;
     var bgsappid = "bgsapp" + campaign_id
 
-    raw = repo_address.replace("github.com", "raw.githubusercontent.com") + "/develop/"
+    raw = repo_address.replace("github.com", "raw.githubusercontent.com") + "/master/"
     $.ajax({
         url: raw + "campaign.json",
         cache: false,
