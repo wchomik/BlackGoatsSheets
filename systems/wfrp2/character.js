@@ -80,7 +80,7 @@ function process_character_sheet(character) {
         for(var name in character.skills[skill_types[skill_type]]) {
             var skill = jspath(character, skills[name])
             var current = 0;
-            if(character.skills[skill_types[skill_type]][name] == 0) {
+            if(!(name in character.skills[skill_types[skill_type]]) || character.skills[skill_types[skill_type]][name] == 0) {
                 explanation = skill
                 if(skill_types[skill_type] == "basic") {
                     current = Math.ceil(skill.value / 2)
@@ -96,76 +96,353 @@ function process_character_sheet(character) {
             }
         }
     }
-    // for(var name in character.skills.advanced) {
-    //     var skill = jspath(character, advanced_skills[name])
-    //     console.log(skill)
-    //     var current = 0;
-    //     if(character.skills.advanced[name] == 0) {
-    //         current = Math.ceil(skill.value / 2)
-    //     } else {
-    //         current = skill.value + character.skills.advanced[name] * 10
-    //     }
-    //     character.skills.advanced[name] = {
-    //         "current": current,
-    //         "taken": character.skills.advanced[name]
-    //     }
-    //     console.log(character.skills.advanced[name])
-    // }
-    // for(var k in character.skills.basic){
-    //     var skill_val = character.skills.basic[k]
-    //     var characteristic = template_sheet.skills.basic[k].characteristic
-    //     if(characteristic == undefined) {
-    //         character.skills.basic[k] = {
-    //             "value": "X",
-    //             "tooltip": ""
-    //         }
-    //     } else {
-    //         var characteristic_val = character.stats.main[characteristic].current
-    //         var skill_modifier = (skill_val - 1) * 10
-    //         var skill_modifier_str = ""
-    //         if(skill_modifier < 0) {
-    //             skill_modifier_str = "- " + Math.abs(skill_modifier)
-    //         } else {
-    //             skill_modifier_str = "+ " + Math.abs(skill_modifier)
-    //         }
 
-    //         var tooltip = characteristic_val + ' <span class="badge badge-primary">'+translations[current_lang][characteristic]+'</span>'
-    //         tooltip = tooltip + "</br>" + skill_modifier_str + ' <span class="badge badge-primary">'+translations[current_lang][k]+'</span>'
-    //         tooltip = (characteristic_val + skill_modifier) + ' <span class="badge badge-primary">'+translations[current_lang]["total"]+'</span> =</br>' + tooltip
-    
-    //         character.skills.basic[k] = {
-    //             "value": skill_val,
-    //             "tooltip": tooltip
-    //         }
-    //     }
-    // }
-    // for(var k in character.skills.advanced){
-    //     var skill_val = character.skills.advanced[k]
-    //     var characteristic = template_sheet.skills.advanced[k].characteristic
-    //     if(characteristic == undefined) {
-    //         character.skills.advanced[k] = {
-    //             "value": "X",
-    //             "tooltip": ""
-    //         }
-    //     } else {
-    //         var characteristic_val = character.stats.main[characteristic].current
-    //         var skill_modifier = (skill_val - 1) * 10
-    //         var skill_modifier_str = ""
-    //         if(skill_modifier < 0) {
-    //             skill_modifier_str = "- " + Math.abs(skill_modifier)
-    //         } else {
-    //             skill_modifier_str = "+ " + Math.abs(skill_modifier)
-    //         }
+    var talents = {
+        "acute_hearing": {
+            "influence": "",
+            "mods": "skills|basic|perception",
+            "value": 20
+        },
+        "aethyric_attunement": {
+            "influence": "",
+            "mods": ""
+        },
+        "alley_cat": {
+            "influence": "",
+            "mods": ""
+        },
+        "ambidextrous": {
+            "influence": "",
+            "mods": ""
+        },
+        "arcane_lore": {
+            "influence": "",
+            "mods": ""
+        },
+        "armoured_casting": {
+            "influence": "",
+            "mods": ""
+        },
+        "artistic": {
+            "influence": "",
+            "mods": ""
+        },
+        "contortionist": {
+            "influence": "",
+            "mods": ""
+        },
+        "coolheaded_dark_lore": {
+            "influence": "",
+            "mods": ""
+        },
+        "dark_magic": {
+            "influence": "",
+            "mods": ""
+        },
+        "dealmaker": {
+            "influence": "",
+            "mods": ""
+        },
+        "disarm": {
+            "influence": "",
+            "mods": ""
+        },
+        "divine_lore": {
+            "influence": "",
+            "mods": ""
+        },
+        "dwarfcraft": {
+            "influence": "",
+            "mods": ""
+        },
+        "etiquette": {
+            "influence": "",
+            "mods": ""
+        },
+        "excellent_vision": {
+            "influence": "",
+            "mods": ""
+        },
+        "fast_hands": {
+            "influence": "",
+            "mods": ""
+        },
+        "fearless": {
+            "influence": "",
+            "mods": ""
+        },
+        "flee": {
+            "influence": "",
+            "mods": ""
+        },
+        "fleet_footed": {
+            "influence": "",
+            "mods": ""
+        },
+        "flier": {
+            "influence": "",
+            "mods": ""
+        },
+        "frenzy": {
+            "influence": "",
+            "mods": ""
+        },
+        "frightening": {
+            "influence": "",
+            "mods": ""
+        },
+        "grudgeborn_fury": {
+            "influence": "",
+            "mods": ""
+        },
+        "hardy": {
+            "influence": "",
+            "mods": ""
+        },
+        "hedge_magic": {
+            "influence": "",
+            "mods": ""
+        },
+        "hoverer": {
+            "influence": "",
+            "mods": ""
+        },
+        "keen_senses": {
+            "influence": "",
+            "mods": ""
+        },
+        "lesser_magic": {
+            "influence": "",
+            "mods": ""
+        },
+        "lightning_parry": {
+            "influence": "",
+            "mods": ""
+        },
+        "lightning_reflexes": {
+            "influence": "",
+            "mods": ""
+        },
+        "linguistics": {
+            "influence": "",
+            "mods": ""
+        },
+        "luck": {
+            "influence": "",
+            "mods": ""
+        },
+        "marksman": {
+            "influence": "",
+            "mods": ""
+        },
+        "master_gunner": {
+            "influence": "",
+            "mods": ""
+        },
+        "master_orator": {
+            "influence": "",
+            "mods": ""
+        },
+        "meditation": {
+            "influence": "",
+            "mods": ""
+        },
+        "menacing": {
+            "influence": "",
+            "mods": ""
+        },
+        "mighty_missile": {
+            "influence": "",
+            "mods": ""
+        },
+        "mighty_shot": {
+            "influence": "",
+            "mods": ""
+        },
+        "mimic": {
+            "influence": "",
+            "mods": ""
+        },
+        "natural_weapons": {
+            "influence": "",
+            "mods": ""
+        },
+        "night_vision": {
+            "influence": "",
+            "mods": ""
+        },
+        "orientation": {
+            "influence": "",
+            "mods": ""
+        },
+        "petty_magic": {
+            "influence": "",
+            "mods": ""
+        },
+        "public_speaking": {
+            "influence": "",
+            "mods": ""
+        },
+        "quick_draw": {
+            "influence": "",
+            "mods": ""
+        },
+        "rapid_reload": {
+            "influence": "",
+            "mods": ""
+        },
+        "resistance_to_chaos": {
+            "influence": "",
+            "mods": ""
+        },
+        "resistance_to_disease": {
+            "influence": "",
+            "mods": ""
+        },
+        "resistance_to_magic": {
+            "influence": "",
+            "mods": ""
+        },
+        "resistance_to_poison": {
+            "influence": "",
+            "mods": ""
+        },
+        "rover": {
+            "influence": "",
+            "mods": ""
+        },
+        "savvy": {
+            "influence": "",
+            "mods": ""
+        },
+        "schemer": {
+            "influence": "",
+            "mods": ""
+        },
+        "seasoned_traveller": {
+            "influence": "",
+            "mods": ""
+        },
+        "sharpshooter": {
+            "influence": "",
+            "mods": ""
+        },
+        "sixth_sense": {
+            "influence": "",
+            "mods": ""
+        },
+        "specialist_weapon_group_various": {
+            "influence": "",
+            "mods": ""
+        },
+        "stouthearted": {
+            "influence": "",
+            "mods": ""
+        },
+        "street_fighting": {
+            "influence": "",
+            "mods": ""
+        },
+        "streetwise": {
+            "influence": "",
+            "mods": ""
+        },
+        "strike_mighty_blow": {
+            "influence": "",
+            "mods": ""
+        },
+        "strike_to_injure": {
+            "influence": "",
+            "mods": ""
+        },
+        "strike_to_stun": {
+            "influence": "",
+            "mods": ""
+        },
+        "strongminded": {
+            "influence": "",
+            "mods": ""
+        },
+        "sturdy": {
+            "influence": "",
+            "mods": ""
+        },
+        "suave": {
+            "influence": "",
+            "mods": ""
+        },
+        "sure_shot": {
+            "influence": "",
+            "mods": ""
+        },
+        "surgery": {
+            "influence": "",
+            "mods": ""
+        },
+        "super_numerate": {
+            "influence": "",
+            "mods": ""
+        },
+        "swashbuckler": {
+            "influence": "",
+            "mods": ""
+        },
+        "terrifying": {
+            "influence": "",
+            "mods": ""
+        },
+        "trapfinder": {
+            "influence": "",
+            "mods": ""
+        },
+        "trick_riding": {
+            "influence": "",
+            "mods": ""
+        },
+        "tunnel_rat": {
+            "influence": "",
+            "mods": ""
+        },
+        "undead": {
+            "influence": "",
+            "mods": ""
+        },
+        "unsettling": {
+            "influence": "",
+            "mods": ""
+        },
+        "very_resilient": {
+            "influence": "",
+            "mods": ""
+        },
+        "very_strong": {
+            "influence": "",
+            "mods": ""
+        },
+        "warrior_born": {
+            "influence": "",
+            "mods": ""
+        },
+        "wrestling": {
+            "influence": "",
+            "mods": ""
+        }
+    }
 
-    //         var tooltip = characteristic_val + ' <span class="badge badge-primary">'+translations[current_lang][characteristic]+'</span>'
-    //         tooltip = tooltip + "</br>" + skill_modifier_str + ' <span class="badge badge-primary">'+translations[current_lang][k]+'</span>'
-    //         tooltip = (characteristic_val + skill_modifier) + ' <span class="badge badge-primary">'+translations[current_lang]["total"]+'</span> =</br>' + tooltip
+    if(!("talents" in character)) {
+        character.talents = {}
+    }
+    for(var talent_name in talents) {
+        var current = 0;
+        if(talent_name in character.talents) {
+            current = 1;
+        }
+        
+        character.talents[talent_name] = {
+            "current": current
+        }
+    }
+    console.log(character.talents['wrestling'].current)
     
-    //         character.skills.advanced[k] = {
-    //             "value": skill_val,
-    //             "tooltip": tooltip
-    //         }
-    //     }  
-    // }
     return character;
 }
