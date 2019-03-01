@@ -88,7 +88,7 @@ function process_character_sheet(character) {
                     current = 0
                 }
             } else {
-                current = skill.value + character.skills[skill_types[skill_type]][name] * 10
+                current = skill.value + (character.skills[skill_types[skill_type]][name] - 1) * 10
             }
             character.skills[skill_types[skill_type]][name] = {
                 "current": current,
