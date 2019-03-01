@@ -128,7 +128,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(skill, key) in character.skills.basic">
+                  <tr v-for="(skill, key) in orderedSkills(character.skills.basic)">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
                     <td style="min-width: 100px">
                       <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
@@ -152,7 +152,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(skill, key) in character.skills.advanced">
+                  <tr v-for="(skill, key) in orderedSkills(character.skills.advanced)">
                     <th scope="row" data-toggle="tooltip" data-html="true" v-bind:title="skill.tooltip">{{ translations[lang][key] }}</th>
                     <td style="min-width: 100px">
                       <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
@@ -201,8 +201,23 @@
     campaings.bgsappid = {...campaign_data, ...campaings.bgsappid}
 
     vue_apps.bgsappid = new Vue({
-    el: '#bgsappid',
-        data: campaings.bgsappid
+        el: '#bgsappid',
+        data: campaings.bgsappid,
+        methods: {
+            orderedSkills: function(skills) {
+                var orderedSkills = {}
+                var ordered_keys = Object.keys(skills)
+                ordered_keys.sort(function(a, b) {
+                    var textA = campaings.bgsappid.translations[campaings.bgsappid.lang][a];
+                    var textB = campaings.bgsappid.translations[campaings.bgsappid.lang][b];
+                    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                });
+                ordered_keys.forEach(function(key) {
+                    orderedSkills[key] = skills[key];
+                });
+                return orderedSkills;
+            }
+        }
     })
 
     $.each( campaings.bgsappid.character_sheets, function( val ) {
