@@ -1,23 +1,33 @@
-function jspath(obj, path) {
-    //console.log(path)
+function jspath_val(obj, path) {
     var rgx0 = /^([^\[|]*)$/g
     var rgx1 = /^([^\[|]*)\|(.+)$/g
     var rgx2 = /^([^\[|]*)\[(.*)\]$/g
     var match
     if( match = rgx0.exec(path) ) {
-        //console.log("Match0: " + match[1])
         return {
             name: match[1],
             value: obj[match[1]]
         }
     } else if (match = rgx1.exec(path)) {
-        //console.log("Match1: " + match[1] + " " + match[2])
-        return jspath(obj[match[1]], match[2])
+        return jspath_val(obj[match[1]], match[2])
     } else if (match = rgx2.exec(path)) {
-        //console.log("Match2: " + match[1] + " " + match[2])
-        obj = jspath(obj[match[1]], match[2])
+        obj = jspath_val(obj[match[1]], match[2])
         obj.name = match[1]
         return obj
+    } else {
+        console.log("Brrrr")
+    }
+}
+
+function jspath_ref(obj, path) {
+    console.log(path)
+    var rgx0 = /^([^\[|]*)$/g
+    var rgx1 = /^([^\[|]*)\|(.+)$/g
+    var match
+    if( match = rgx0.exec(path) ) {
+        return  obj[match[1]];
+    } else if (match = rgx1.exec(path)) {
+        return jspath_ref(obj[match[1]], match[2])
     } else {
         console.log("Brrrr")
     }
@@ -66,9 +76,6 @@ function translate_all(language) {
     current_lang = language
     $("[i18nid]").each(function (){
         $(this).text(translate($(this).attr("i18nid")))
-    })
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
     })
     for(vapp in vue_apps) {
         vue_apps[vapp].lang = current_lang
