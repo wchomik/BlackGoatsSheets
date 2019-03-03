@@ -78,7 +78,7 @@ function process_character_sheet(character) {
     var skill_types = ["basic", "advanced"];
     for(var skill_type in skill_types) {
         for(var name in character.skills[skill_types[skill_type]]) {
-            var skill = jspath(character, skills[name])
+            var skill = jspath_val(character, skills[name])
             var current = 0;
             if(!(name in character.skills[skill_types[skill_type]]) || character.skills[skill_types[skill_type]][name] == 0) {
                 explanation = skill
@@ -99,332 +99,335 @@ function process_character_sheet(character) {
 
     var talents = {
         "acute_hearing": {
-            "influence": "",
-            "mods": "skills|basic|perception",
+            "influence": ["skills|basic|perception"],
             "value": 20
         },
         "aethyric_attunement": {
-            "influence": "",
+            "influence": ["skills|advanced|channelling", "skills|advanced|magical_sense"],
             "mods": ""
         },
         "alley_cat": {
-            "influence": "",
+            "influence": ["skills|basic|concealment", "skills|basic|silent_move"],
             "mods": ""
         },
         "ambidextrous": {
-            "influence": "",
+            "influence": ["stats|main|weapon", "stats|main|ballistic"],
             "mods": ""
         },
         "arcane_lore": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "armoured_casting": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "artistic": {
-            "influence": "",
+            "influence": ["skills|basic|evaluate", "skills|basic|trade"],
             "mods": ""
         },
         "contortionist": {
-            "influence": "",
+            "influence": ["skills|advanced|performer", "stats|main|agility"],
             "mods": ""
         },
-        "coolheaded_dark_lore": {
-            "influence": "",
+        "coolheaded": {
+            "influence": ["stats|main|will"],
+            "mods": ""
+        },
+        "dark_lore": {
+            "influence": [],
             "mods": ""
         },
         "dark_magic": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "dealmaker": {
-            "influence": "",
+            "influence": ["skills|basic|evaluate", "skills|basic|haggle"],
             "mods": ""
         },
         "disarm": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "divine_lore": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "dwarfcraft": {
-            "influence": "",
+            "influence": ["skills|basic|trade"],
             "mods": ""
         },
         "etiquette": {
-            "influence": "",
+            "influence": ["skills|basic|charm", "skills|basic|gossip"],
             "mods": ""
         },
         "excellent_vision": {
-            "influence": "",
+            "influence": ["skills|basic|perception", "skills|advanced|lip_reading"],
             "mods": ""
         },
         "fast_hands": {
-            "influence": "",
+            "influence": ["stats|main|weapon"],
             "mods": ""
         },
         "fearless": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "flee": {
-            "influence": "",
+            "influence": ["stats|secondary|movement"],
             "mods": ""
         },
         "fleet_footed": {
-            "influence": "",
+            "influence": ["stats|secondary|movement"],
             "mods": ""
         },
         "flier": {
-            "influence": "",
+            "influence": ["stats|secondary|movement"],
             "mods": ""
         },
         "frenzy": {
-            "influence": "",
+            "influence": ["stats|main|weapon", "stats|main|will", "stats|main|strength", "stats|main|intelligence"],
             "mods": ""
         },
         "frightening": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "grudgeborn_fury": {
-            "influence": "",
+            "influence": ["stats|main|weapon"],
             "mods": ""
         },
         "hardy": {
-            "influence": "",
-            "mods": ""
+            "influence": ["stats|secondary|wounds"],
+            "mods": []
         },
         "hedge_magic": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "hoverer": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "keen_senses": {
-            "influence": "",
+            "influence": ["skills|basic|perception"],
             "mods": ""
         },
         "lesser_magic": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "lightning_parry": {
-            "influence": "",
+            "influence": ["stats|secondary|attacks"],
             "mods": ""
         },
         "lightning_reflexes": {
-            "influence": "",
+            "influence": ["stats|main|agility"],
             "mods": ""
         },
         "linguistics": {
-            "influence": "",
+            "influence": ["skills|advanced|readwrite", "skills|advanced|speak_language"],
             "mods": ""
         },
         "luck": {
-            "influence": "",
+            "influence": ["stats|secondary|fate_points"],
             "mods": ""
         },
         "marksman": {
-            "influence": "",
+            "influence": ["stats|main|ballistic"],
             "mods": ""
         },
         "master_gunner": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "master_orator": {
-            "influence": "",
+            "influence": ["skills|basic|charm"],
             "mods": ""
         },
         "meditation": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "menacing": {
-            "influence": "",
+            "influence": ["skills|basic|intimidate", "skills|advanced|torture"],
             "mods": ""
         },
         "mighty_missile": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "mighty_shot": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "mimic": {
-            "influence": "",
+            "influence": ["skills|basic|disguise", "skills|advanced|performer", "skills|advanced|speak_language"],
             "mods": ""
         },
         "natural_weapons": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "night_vision": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "orientation": {
-            "influence": "",
+            "influence": ["skills|advanced|navigation"],
             "mods": ""
         },
         "petty_magic": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "public_speaking": {
-            "influence": "",
+            "influence": ["skills|basic|charm"],
             "mods": ""
         },
         "quick_draw": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "rapid_reload": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "resistance_to_chaos": {
-            "influence": "",
+            "influence": ["stats|main|will"],
             "mods": ""
         },
         "resistance_to_disease": {
-            "influence": "",
+            "influence": ["stats|main|toughness"],
             "mods": ""
         },
         "resistance_to_magic": {
-            "influence": "",
+            "influence": ["stats|main|will"],
             "mods": ""
         },
         "resistance_to_poison": {
-            "influence": "",
+            "influence": ["stats|main|toughness"],
             "mods": ""
         },
         "rover": {
-            "influence": "",
+            "influence": ["skills|basic|concealment", "skills|basic|silent_move"],
             "mods": ""
         },
         "savvy": {
-            "influence": "",
+            "influence": ["stats|main|intelligence"],
             "mods": ""
         },
         "schemer": {
-            "influence": "",
+            "influence": ["skills|basic|charm", "stats|main|will"],
             "mods": ""
         },
         "seasoned_traveller": {
-            "influence": "",
+            "influence": ["skills|advanced|common_knowledge", "skills|advanced|speak_language"],
             "mods": ""
         },
         "sharpshooter": {
-            "influence": "",
+            "influence": ["stats|main|ballistic"],
             "mods": ""
         },
         "sixth_sense": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "specialist_weapon_group_various": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "stouthearted": {
-            "influence": "",
+            "influence": ["stats|main|will"],
             "mods": ""
         },
         "street_fighting": {
-            "influence": "",
+            "influence": ["stats|main|weapon"],
             "mods": ""
         },
         "streetwise": {
-            "influence": "",
+            "influence": ["skills|basic|charm", "skills|basic|gossip"],
             "mods": ""
         },
         "strike_mighty_blow": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "strike_to_injure": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "strike_to_stun": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "strongminded": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "sturdy": {
-            "influence": "",
+            "influence": ["stats|secondary|movement"],
             "mods": ""
         },
         "suave": {
-            "influence": "",
+            "influence": ["stats|main|fellowship"],
             "mods": ""
         },
         "sure_shot": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "surgery": {
-            "influence": "",
+            "influence": ["skills|advanced|heal"],
             "mods": ""
         },
         "super_numerate": {
-            "influence": "",
+            "influence": ["skills|basic|perception", "skills|basic|gamble", "skills|advanced|navigation"],
             "mods": ""
         },
         "swashbuckler": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "terrifying": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "trapfinder": {
-            "influence": "",
+            "influence": ["skills|basic|perception", "skills|advanced|pick_lock"],
             "mods": ""
         },
         "trick_riding": {
-            "influence": "",
+            "influence": ["skills|advanced|ride"],
             "mods": ""
         },
         "tunnel_rat": {
-            "influence": "",
+            "influence": ["skills|basic|concealment", "skills|basic|silent_move"],
             "mods": ""
         },
         "undead": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "unsettling": {
-            "influence": "",
+            "influence": [],
             "mods": ""
         },
         "very_resilient": {
-            "influence": "",
+            "influence": ["stats|main|toughness"],
             "mods": ""
         },
         "very_strong": {
-            "influence": "",
+            "influence": ["stats|main|strength"],
             "mods": ""
         },
         "warrior_born": {
-            "influence": "",
+            "influence": ["stats|main|weapon"],
             "mods": ""
         },
         "wrestling": {
-            "influence": "",
+            "influence": ["stats|main|weapon", "stats|main|strength"],
             "mods": ""
         }
     }
@@ -436,13 +439,16 @@ function process_character_sheet(character) {
         var current = 0;
         if(talent_name in character.talents) {
             current = 1;
+            talents[talent_name].influence.forEach(function(path){
+                let stat = jspath_ref(character, path)
+                "talents" in stat ? stat.talents.push(talent_name) : stat.talents = [talent_name]
+            });
         }
         
         character.talents[talent_name] = {
             "current": current
         }
     }
-    console.log(character.talents['wrestling'].current)
     
     return character;
 }
