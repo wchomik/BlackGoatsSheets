@@ -20,7 +20,6 @@ function jspath_val(obj, path) {
 }
 
 function jspath_ref(obj, path) {
-    console.log(path)
     var rgx0 = /^([^\[|]*)$/g
     var rgx1 = /^([^\[|]*)\|(.+)$/g
     var match
@@ -55,7 +54,6 @@ function addCampaign(repo_address) {
                 url: "systems/" + campaign_data.system + "/template.html",
                 cache: true,
                 success: function(template_data) {
-                    //template_cache[system] = Handlebars.compile(data);
                     var html = template_data.replace(/bgsappid/g, bgsappid)
                     html = html.replace(/bgsrepourl/g, repo_address); 
                     $("#content").append('<div class="tab-pane fade' + (campaign_id == 0 ? " show active": "") + '" id="' + panel_id + '" role="tabpanel" aria-labelledby="' + tab_id + '">' + html + '</div>');
