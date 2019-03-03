@@ -155,7 +155,7 @@ function process_character_sheet(character) {
             "mods": ""
         },
         "dwarfcraft": {
-            "influence": ["skills|basic|trade"],
+            "influence": ["skills|advanced|trade"],
             "mods": ""
         },
         "etiquette": {
