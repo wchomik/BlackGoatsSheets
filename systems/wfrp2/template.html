@@ -30,38 +30,41 @@
           aria-labelledby="'nav-tab-' + character.id"
           role="tabpanel">
           <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-print-4">
+            <div v-if="'portrait' in character && character.portrait != ''" class="col text-center align-middle">
+              <img v-bind:src="character.portrait" class="shadow rounded" alt="portrait">
+            </div>
+            <div class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
-                  <tr><th scope="row">{{ translate("name") }}:</th><td>{{ character.name }}</td></tr>
-                  <tr><th scope="row">{{ translate("race") }}:</th><td>{{ character.race }}</td></tr>
-                  <tr><th scope="row">{{ translate("sex") }}:</th><td>{{ character.sex }}</td></tr>
-                  <tr><th scope="row">{{ translate("age") }}:</th><td>{{ character.age }}</td></tr>
-                  <tr><th scope="row">{{ translate("height") }}:</th><td>{{ character.height }}</td></tr>
-                  <tr><th scope="row">{{ translate("weight") }}:</th><td>{{ character.weight }}</td></tr>
-                  <tr><th scope="row">{{ translate("eyes") }}:</th><td>{{ character.eyes }}</td></tr>
-                  <tr><th scope="row">{{ translate("hair") }}:</th><td>{{ character.hair }}</td></tr>
-                  <tr><th scope="row">{{ translate("distinguishing_marks") }}:</th><td>{{ character.distinguishing_marks }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("name") }}:</th><td>{{ character.name }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("race") }}:</th><td>{{ character.race }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("sex") }}:</th><td>{{ character.sex }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("age") }}:</th><td>{{ character.age }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("height") }}:</th><td>{{ character.height }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("weight") }}:</th><td>{{ character.weight }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("eyes") }}:</th><td>{{ character.eyes }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("hair") }}:</th><td>{{ character.hair }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("distinguishing_marks") }}:</th><td>{{ character.distinguishing_marks }}</td></tr>
                 </tbody>
               </table>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-print-4">
+            <div class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
-                  <tr><th scope="row">{{ translate("career") }}:</th><td>{{ character.career }}</td></tr>
-                  <tr><th scope="row">{{ translate("career_path") }}:</th><td>{{ character.career_path }}</td></tr>
-                  <tr><th scope="row">{{ translate("family") }}:</th><td>{{ character.family }}</td></tr>
-                  <tr><th scope="row">{{ translate("birthplace") }}:</th><td>{{ character.birthplace }}</td></tr>
-                  <tr><th scope="row">{{ translate("religion") }}:</th><td>{{ character.religion }}</td></tr>
-                  <tr><th scope="row">{{ translate("star_sign") }}:</th><td>{{ character.star_sign }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("career") }}:</th><td>{{ character.career }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("career_path") }}:</th><td>{{ character.career_path }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("family") }}:</th><td>{{ character.family }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("birthplace") }}:</th><td>{{ character.birthplace }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("religion") }}:</th><td>{{ character.religion }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("star_sign") }}:</th><td>{{ character.star_sign }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("disorders") }}:</th><td>{{ character.disorders }}</td></tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("scars") }}:</th><td>{{ character.scars }}</td></tr>
                 </tbody>
               </table>
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-print-4">
+            <div v-if="character.background" class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
-                  <tr><th scope="row">{{ translate("disorders") }}:</th><td>{{ character.disorders }}</td></tr>
-                  <tr><th scope="row">{{ translate("scars") }}:</th><td>{{ character.scars }}</td></tr>
                   <tr><th scope="row">{{ translate("background") }}:</th><td>{{ character.background }}</td></tr>
                 </tbody>
               </table>
@@ -300,6 +303,9 @@
 
     $.each( campaings.bgsappid.character_sheets, function( val ) {
         $.getJSON(raw + "characters/" + campaings.bgsappid.character_sheets[val], function(character_data) {
+            if("portrait" in character_data) {
+                character_data.portrait = raw + "characters/" + character_data.portrait;
+            }
             campaings.bgsappid.characters.push(process_character_sheet(character_data));
         });
     });
