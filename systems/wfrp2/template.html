@@ -30,8 +30,21 @@
           aria-labelledby="'nav-tab-' + character.id"
           role="tabpanel">
           <div class="row">
-            <div v-if="'portrait' in character && character.portrait != ''" class="col text-center align-middle">
+            <!-- <div v-if="'portrait' in character && character.portrait != ''" class="col text-center align-middle">
               <img v-bind:src="character.portrait" class="shadow rounded" alt="portrait">
+            </div> -->
+            <div v-if="('portrait' in character && character.portrait != '') || character.background" class="col">
+              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
+                <tbody>
+                  <tr v-if="'portrait' in character && character.portrait != ''">
+                      <th style="width: 25%" scope="row">{{ translate("portrait") }}:</th>
+                      <td class="text-center align-middle"><img v-bind:src="character.portrait" class="shadow rounded" alt="portrait"></td>
+                  </tr>
+                  <tr v-if="character.background">
+                    <th scope="row">{{ translate("background") }}:</th><td>{{ character.background }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
@@ -59,13 +72,6 @@
                   <tr><th style="width: 25%" scope="row">{{ translate("star_sign") }}:</th><td>{{ character.star_sign }}</td></tr>
                   <tr><th style="width: 25%" scope="row">{{ translate("disorders") }}:</th><td>{{ character.disorders }}</td></tr>
                   <tr><th style="width: 25%" scope="row">{{ translate("scars") }}:</th><td>{{ character.scars }}</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div v-if="character.background" class="col">
-              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
-                <tbody>
-                  <tr><th scope="row">{{ translate("background") }}:</th><td>{{ character.background }}</td></tr>
                 </tbody>
               </table>
             </div>
