@@ -30,15 +30,16 @@
           aria-labelledby="'nav-tab-' + character.id"
           role="tabpanel">
           <div class="row">
-            <!-- <div v-if="'portrait' in character && character.portrait != ''" class="col text-center align-middle">
-              <img v-bind:src="character.portrait" class="shadow rounded" alt="portrait">
-            </div> -->
             <div v-if="('portrait' in character && character.portrait != '') || character.background" class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr v-if="'portrait' in character && character.portrait != ''">
                       <th style="width: 25%" scope="row">{{ translate("portrait") }}:</th>
                       <td class="text-center align-middle"><img v-bind:src="character.portrait" class="shadow rounded" alt="portrait"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">{{ translate('experience') }}</th>
+                    <td>{{ character.exp.total }} / {{ character.exp.spent }} / {{ character.exp.total - character.exp.spent }}</td>
                   </tr>
                   <tr v-if="character.background">
                     <th scope="row">{{ translate("background") }}:</th><td>{{ character.background }}</td>
@@ -78,7 +79,52 @@
           </div>
           <div class="row">
             <div class="col-12 col-md-6">
-            <!-- <div class="card"><div class="card-body"> -->
+              <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translate('weapon') }}</th>
+                    <th scope="col">{{ translate('group') }}</th>
+                    <th scope="col">{{ translate('damage') }}</th>
+                    <th scope="col">{{ translate('range') }}</th>
+                    <th scope="col">{{ translate('qualities') }}</th>
+                    <th scope="col">{{ translate('desc') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(weapon, key) in character.weapons">
+                    <th scope="row">{{ weapon.name }}</th>
+                    <td scope="col">{{ translate(weapon.group) }}</td>
+                    <td scope="col">{{ weapon.damage }}</td>
+                    <td scope="col">{{ weapon.range }}</td>
+                    <td scope="col"><span v-for="(quality, key) in weapon.qualities">{{ (key > 0 ? ", " : "") + translate(quality) }}</span></td>
+                    <td scope="col">{{ weapon.desc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-md-6">
+              <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ translate('armour_type') }}</th>
+                    <th scope="col">{{ translate('location') }}</th>
+                    <th scope="col">{{ translate('ap') }}</th>
+                    <th scope="col">{{ translate('desc') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(piece, key) in character.armour">
+                    <th scope="row">{{ piece.name }}</th>
+                    <td scope="col"><span v-for="(location, key) in piece.locations">{{ (key > 0 ? ", " : "") + translate(location) }}</span></td>
+                    <td scope="col">{{ piece.ap }}</td>
+                    <td scope="col">{{ piece.desc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -104,10 +150,8 @@
                   </tr>
                 </tbody>
               </table>
-            <!-- </div></div> -->
             </div>
             <div class="col-12 col-md-6">
-            <!-- <div class="card"><div class="card-body"> -->
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -133,12 +177,10 @@
                   </tr>
                 </tbody>
               </table>
-            <!-- </div></div> -->
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-md-6">
-            <!-- <div class="card"><div class="card-body"> -->
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -164,10 +206,8 @@
                   </tr>
                 </tbody>
               </table>
-            <!-- </div></div> -->
             </div>
             <div class="col-12 col-md-6">
-            <!-- <div class="card"><div class="card-body"> -->
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -193,7 +233,6 @@
                   </tr>
                 </tbody>
               </table>
-            <!-- </div></div> -->
             </div>
           </div>
           <div class="row">
@@ -263,8 +302,8 @@
                 var orderedObject = {}
                 var ordered_keys = Object.keys(object)
                 ordered_keys.sort(function(a, b) {
-                    var textA = campaings.bgsappid.translations[campaings.bgsappid.lang][a];
-                    var textB = campaings.bgsappid.translations[campaings.bgsappid.lang][b];
+                    var textA = a in campaings.bgsappid.translations[campaings.bgsappid.lang] ? campaings.bgsappid.translations[campaings.bgsappid.lang][a] : a;
+                    var textB = b in campaings.bgsappid.translations[campaings.bgsappid.lang] ? campaings.bgsappid.translations[campaings.bgsappid.lang][b] : b;
                     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
                 });
                 ordered_keys.forEach(function(key) {
@@ -282,7 +321,7 @@
                 return chunk
             },
             translate: function(str) {
-                return this.$data.translations[this.$data.lang][str]
+                return str in this.$data.translations[this.$data.lang] ? this.$data.translations[this.$data.lang][str] : str;
             },
             getTooltip: function(type, stat){
                 var tooltip = "";
