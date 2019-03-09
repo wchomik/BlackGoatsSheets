@@ -443,5 +443,9 @@
     "legs": "Legs",
     "all": "All",
     "inventory": "Inventory",
-    "experience": "Experience"
+    "experience": "Experience",
+    "coins": "Coins",
+    "crowns": "Gold crowns",
+    "shillings": "Silver shillings (1gc = 20s)",
+    "pennies": "Brass pennies (1s = 12p)"
 }

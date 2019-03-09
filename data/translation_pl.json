@@ -443,5 +443,9 @@
     "legs": "nogi",
     "all": "wszystkie",
     "inventory": "Wyposażenie",
-    "experience": "Doświadczenie"
+    "experience": "Doświadczenie",
+    "coins": "Monety",
+    "crowns": "Złote korony",
+    "shillings": "Srebrne szylingi (1zk = 20s)",
+    "pennies": "Miedziane pensy (1p = 12s)"
 }

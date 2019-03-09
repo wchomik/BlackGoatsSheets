@@ -1,5 +1,5 @@
 <div id="bgsappid" class="container-fluid">
-  <h1 class="d-print-none">{{ name }}</h1>
+  <h1 class="d-print-none"><a v-bind:href="repo_url">{{ name }}</a></h1>
   <ul class="nav nav-pills mb-3 d-print-none" id="pills-tab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translate('character-sheets') }}</a>
@@ -30,64 +30,88 @@
           aria-labelledby="'nav-tab-' + character.id"
           role="tabpanel">
           <div class="row">
-            <div v-if="('portrait' in character && character.portrait != '') || character.background" class="col">
+            <div v-if="('portrait' in character && character.portrait != '')" class="col">
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr v-if="'portrait' in character && character.portrait != ''">
-                      <th style="width: 25%" scope="row">{{ translate("portrait") }}:</th>
-                      <td class="text-center align-middle"><img v-bind:src="character.portrait" class="shadow rounded" alt="portrait"></td>
+                      <!-- <th style="width: 25%" scope="row">{{ translate("portrait") }}:</th> -->
+                      <td colspan="2" class="text-center align-middle"><img v-bind:src="character.portrait" class="shadow rounded mx-auto d-block" alt="portrait"></td>
                   </tr>
+                  <tr><th style="width: 25%" scope="row">{{ translate("name") }}:</th><td>{{ character.name }}</td></tr>
                   <tr>
                     <th scope="row">{{ translate('experience') }}</th>
                     <td>{{ character.exp.total }} / {{ character.exp.spent }} / {{ character.exp.total - character.exp.spent }}</td>
                   </tr>
-                  <tr v-if="character.background">
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
+                <tbody>
+                  <tr><th style="width: 50%" scope="row">{{ translate("race") }}:</th><td>{{ character.race }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("sex") }}:</th><td>{{ character.sex }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("age") }}:</th><td>{{ character.age }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("height") }}:</th><td>{{ character.height }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("weight") }}:</th><td>{{ character.weight }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("eyes") }}:</th><td>{{ character.eyes }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("hair") }}:</th><td>{{ character.hair }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("distinguishing_marks") }}:</th><td>{{ character.distinguishing_marks }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
+                <tbody>
+                  <tr><th style="width: 50%" scope="row">{{ translate("career") }}:</th><td>{{ character.career }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("career_path") }}:</th><td>{{ character.career_path }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("family") }}:</th><td>{{ character.family }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("birthplace") }}:</th><td>{{ character.birthplace }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("religion") }}:</th><td>{{ character.religion }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("star_sign") }}:</th><td>{{ character.star_sign }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("disorders") }}:</th><td>{{ character.disorders }}</td></tr>
+                  <tr><th style="width: 50%" scope="row">{{ translate("scars") }}:</th><td>{{ character.scars }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div v-if="character.background" class="row">
+            <div class="col">
+              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
+                <tbody>
+                  <tr>
                     <th scope="row">{{ translate("background") }}:</th><td>{{ character.background }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="col">
-              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
-                <tbody>
-                  <tr><th style="width: 25%" scope="row">{{ translate("name") }}:</th><td>{{ character.name }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("race") }}:</th><td>{{ character.race }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("sex") }}:</th><td>{{ character.sex }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("age") }}:</th><td>{{ character.age }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("height") }}:</th><td>{{ character.height }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("weight") }}:</th><td>{{ character.weight }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("eyes") }}:</th><td>{{ character.eyes }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("hair") }}:</th><td>{{ character.hair }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("distinguishing_marks") }}:</th><td>{{ character.distinguishing_marks }}</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col">
-              <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
-                <tbody>
-                  <tr><th style="width: 25%" scope="row">{{ translate("career") }}:</th><td>{{ character.career }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("career_path") }}:</th><td>{{ character.career_path }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("family") }}:</th><td>{{ character.family }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("birthplace") }}:</th><td>{{ character.birthplace }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("religion") }}:</th><td>{{ character.religion }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("star_sign") }}:</th><td>{{ character.star_sign }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("disorders") }}:</th><td>{{ character.disorders }}</td></tr>
-                  <tr><th style="width: 25%" scope="row">{{ translate("scars") }}:</th><td>{{ character.scars }}</td></tr>
-                </tbody>
-              </table>
-            </div>
           </div>
-          <div class="row">
+          <div class="row pagebreak">
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">{{ translate('weapon') }}</th>
-                    <th scope="col">{{ translate('group') }}</th>
-                    <th scope="col">{{ translate('damage') }}</th>
-                    <th scope="col">{{ translate('range') }}</th>
-                    <th scope="col">{{ translate('qualities') }}</th>
-                    <th scope="col">{{ translate('desc') }}</th>
+                    <th scope="col" colspan="2" class="small">{{ translate('coins') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ translate('crowns') }}</th><td scope="col">{{ character.coins.crowns }}</td>
+                  </tr><tr>
+                    <th scope="row">{{ translate('shillings') }}</th><td scope="col">{{ character.coins.shillings }}</td>
+                  </tr><tr>
+                    <th scope="row">{{ translate('pennies') }}</th><td scope="col">{{ character.coins.pennies }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col" class="small">{{ translate('weapon') }}</th>
+                    <th scope="col" class="small">{{ translate('group') }}</th>
+                    <th scope="col" class="small">{{ translate('damage') }}</th>
+                    <th scope="col" class="small">{{ translate('range') }}</th>
+                    <th scope="col" class="small">{{ translate('qualities') }}</th>
+                    <th scope="col" class="small">{{ translate('desc') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -97,19 +121,17 @@
                     <td scope="col">{{ weapon.damage }}</td>
                     <td scope="col">{{ weapon.range }}</td>
                     <td scope="col"><span v-for="(quality, key) in weapon.qualities">{{ (key > 0 ? ", " : "") + translate(quality) }}</span></td>
-                    <td scope="col">{{ weapon.desc }}</td>
+                    <td scope="col" class="small">{{ weapon.desc }}</td>
                   </tr>
                 </tbody>
               </table>
-            </div>
-            <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">{{ translate('armour_type') }}</th>
-                    <th scope="col">{{ translate('location') }}</th>
-                    <th scope="col">{{ translate('ap') }}</th>
-                    <th scope="col">{{ translate('desc') }}</th>
+                    <th scope="col" class="small">{{ translate('armour_type') }}</th>
+                    <th scope="col" class="small">{{ translate('location') }}</th>
+                    <th scope="col" class="small">{{ translate('ap') }}</th>
+                    <th scope="col" class="small">{{ translate('desc') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -117,10 +139,26 @@
                     <th scope="row">{{ piece.name }}</th>
                     <td scope="col"><span v-for="(location, key) in piece.locations">{{ (key > 0 ? ", " : "") + translate(location) }}</span></td>
                     <td scope="col">{{ piece.ap }}</td>
-                    <td scope="col">{{ piece.desc }}</td>
+                    <td scope="col" class="small">{{ piece.desc }}</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="col-12 col-md-6">
+                <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="small">{{ translate('inventory') }}</th>
+                        <th scope="col" class="small">{{ translate('desc') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(item, key) in character.inventory">
+                        <th scope="row">{{ item.name }}</th>
+                        <td scope="col" class="small">{{ item.desc }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
           </div>
           <div class="row">
@@ -144,8 +182,8 @@
                   v-bind:title="getTooltip('stat', stat)">
                     <th scope="row"><span class="d-none d-lg-inline">{{ translate(key) }} </span><span class="badge badge-primary">{{ translate("_"+key) }}</span></th>
                     <td>{{stat.starting}}</td>
-                    <td>+{{stat.advance}}</td>
-                    <td>{{stat.taken}}</td>
+                    <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : "+" + stat.advance }}</td>
+                    <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : stat.taken + "/" + (stat.advance/5)}}</td>
                     <td>{{stat.current}}</td>
                   </tr>
                 </tbody>
@@ -179,7 +217,7 @@
               </table>
             </div>
           </div>
-          <div class="row">
+          <div class="row pagebreak">
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -235,7 +273,7 @@
               </table>
             </div>
           </div>
-          <div class="row">
+          <div class="row pagebreak">
             <div class="col-6 col-md-3" v-for="index in 4" :key="index">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -279,6 +317,7 @@
 <script>
     var repo_url = "bgsrepourl";
     var campaign_data = {
+        "repo_url": repo_url,
         "lang": "pl",
         "translations": translations,
         "characters": [],

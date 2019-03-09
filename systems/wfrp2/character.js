@@ -10,13 +10,13 @@ function process_character_sheet(character) {
     }
 
     character.stats.secondary.strength_bonus = {
-        "current": character.stats.main.strength.current,
+        "current": parseInt(character.stats.main.strength.current / 10),
         "starting": "disabled",
         "advance": "disabled",
         "taken": "disabled",
     };
     character.stats.secondary.toughness_bonus = {
-        "current": character.stats.main.toughness.current,
+        "current": parseInt(character.stats.main.toughness.current / 10),
         "starting": "disabled",
         "advance": "disabled",
         "taken": "disabled",
