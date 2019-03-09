@@ -24,7 +24,8 @@ function jspath_ref(obj, path) {
     var rgx1 = /^([^\[|]*)\|(.+)$/g
     var match
     if( match = rgx0.exec(path) ) {
-        return  obj[match[1]];
+        var key = Object.keys(obj).find(value => new RegExp(path).test(value));
+        return  obj[key];
     } else if (match = rgx1.exec(path)) {
         return jspath_ref(obj[match[1]], match[2])
     } else {
