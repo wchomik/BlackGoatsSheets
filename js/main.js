@@ -20,8 +20,8 @@ function jspath_val(obj, path) {
 }
 
 function jspath_ref(obj, path) {
-    var rgx0 = /^([^\[|]*)$/g
-    var rgx1 = /^([^\[|]*)\|(.+)$/g
+    var rgx0 = /^([^|]*)$/g
+    var rgx1 = /^([^|]*)\|(.+)$/g
     var match
     if( match = rgx0.exec(path) ) {
         var key = Object.keys(obj).find(value => new RegExp(path).test(value));
