@@ -31,6 +31,9 @@
           role="tabpanel">
           <div class="row">
             <div class="col">
+              <div class="continer table-head">
+                <img src="static/flat-hammer.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr v-if="'portrait' in character && character.portrait != ''">
@@ -46,6 +49,9 @@
               </table>
             </div>
             <div class="col">
+              <div class="continer table-head">
+                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr><th style="width: 50%" scope="row">{{ translate("race") }}:</th><td>{{ character.race }}</td></tr>
@@ -60,6 +66,9 @@
               </table>
             </div>
             <div class="col">
+              <div class="continer table-head">
+                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr><th style="width: 50%" scope="row">{{ translate("career") }}:</th><td>{{ character.career }}</td></tr>
@@ -76,6 +85,9 @@
           </div>
           <div v-if="character.background" class="row">
             <div class="col">
+              <div class="continer table-head">
+                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
                   <tr>
@@ -307,6 +319,9 @@
           </div>
           <div class="row pagebreak">
             <div class="col-6 col-md-3" v-for="index in 4" :key="index">
+              <div class="continer table-head">
+                <img src="static/aura.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                     <tr>
