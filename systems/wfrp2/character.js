@@ -465,6 +465,42 @@ function process_character_sheet(character) {
             "influence": []
         },
         "specialist_weapon_group_various": {
+            "influence": [] 
+        },
+        "specialist_weapon_group_gunpowder": {
+            "influence": []
+        },
+        "specialist_weapon_group_fencing": {
+            "influence": []
+        },
+        "specialist_weapon_group_two_handed": {
+            "influence": []
+        },
+        "specialist_weapon_group_flail": {
+            "influence": []
+        },
+        "specialist_weapon_group_parrying": {
+            "influence": []
+        },
+        "specialist_weapon_group_cavalry": {
+            "influence": []
+        },
+        "specialist_weapon_group_entangling": {
+            "influence": []
+        },
+        "specialist_weapon_group_crossbow": {
+            "influence": []
+        },
+        "specialist_weapon_group_longbow": {
+            "influence": []
+        },
+        "specialist_weapon_group_engineer": {
+            "influence": []
+        },
+        "specialist_weapon_group_sling": {
+            "influence": []
+        },
+        "specialist_weapon_group_throwing": {
             "influence": []
         },
         "stouthearted": {
