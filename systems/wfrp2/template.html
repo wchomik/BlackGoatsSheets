@@ -87,6 +87,9 @@
           </div>
           <div class="row pagebreak">
             <div class="col-12 col-md-6">
+              <div class="continer table-head">
+                <img src="static/coins.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -103,10 +106,15 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="continer table-head">
+                <img src="static/saber-and-pistol.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th scope="col" class="small">{{ translate('weapons') }}</th>
+                    <th scope="col" class="small">
+                      {{ translate('weapons') }}
+                    </th>
                     <th scope="col" class="small">{{ translate('group') }}</th>
                     <th scope="col" class="small">{{ translate('damage') }}</th>
                     <th scope="col" class="small">{{ translate('range') }}</th>
@@ -125,6 +133,9 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="continer table-head">
+                <img src="static/breastplate.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -145,26 +156,32 @@
               </table>
             </div>
             <div class="col-12 col-md-6">
-                <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="small">{{ translate('inventory') }}</th>
-                        <th scope="col" class="small">{{ translate('desc') }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(item, key) in character.inventory">
-                        <th scope="row">{{ item.name }}</th>
-                        <td scope="col" class="small">{{ item.desc }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div class="continer table-head">
+                <img src="static/knapsack.png" class="icon mx-auto d-block" alt="icon">
+              </div>
+              <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="small">{{ translate('inventory') }}</th>
+                      <th scope="col" class="small">{{ translate('desc') }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, key) in character.inventory">
+                      <th scope="row">{{ item.name }}</th>
+                      <td scope="col" class="small">{{ item.desc }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
           </div>
           <!-- Stats -->
           <div class="row">
             <!-- Primary Stats -->
             <div class="col-12 col-md-6">
+              <div class="continer table-head">
+                <img src="static/anatomy.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -193,6 +210,9 @@
             </div>
             <!-- Secondary Stats -->
             <div class="col-12 col-md-6">
+              <div class="continer table-head">
+                <img src="static/muscle-up.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -224,11 +244,14 @@
           <div class="row pagebreak">
             <!-- Basic Skills -->
             <div class="col-12 col-md-6">
+              <div class="continer table-head">
+                <img src="static/gift-of-knowledge.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center small" scope="col" colspan="2">{{ translate('basic') }}</th>
-                    <th class="text-center small" scope="col">{{ translate('current') }}</th>
+                    <th class="small" scope="col" colspan="2">{{ translate('basic') }}</th>
+                    <th class="small" scope="col">{{ translate('current') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -252,11 +275,14 @@
             </div>
             <!-- Advanced Skills -->
             <div class="col-12 col-md-6">
+              <div class="continer table-head">
+                <img src="static/enlightenment.png" class="icon mx-auto d-block" alt="icon">
+              </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th class="text-center small" scope="col" colspan="2">{{ translate('advanced') }}</th>
-                    <th class="text-center small" scope="col">{{ translate('current') }}</th>
+                    <th class="small" scope="col" colspan="2">{{ translate('advanced') }}</th>
+                    <th class="small" scope="col">{{ translate('current') }}</th>
                   </tr>
                 </thead>
                 <tbody>
