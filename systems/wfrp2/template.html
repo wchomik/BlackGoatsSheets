@@ -161,7 +161,9 @@
                   </table>
             </div>
           </div>
+          <!-- Stats -->
           <div class="row">
+            <!-- Primary Stats -->
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -180,7 +182,7 @@
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('stat', stat)">
-                    <th scope="row"><span class="d-none d-lg-inline">{{ translate(key) }} </span><span class="badge badge-primary">{{ translate("_"+key) }}</span></th>
+                    <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
                     <td>{{stat.starting}}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : "+" + stat.advance }}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : stat.taken + "/" + (stat.advance/5)}}</td>
@@ -189,6 +191,7 @@
                 </tbody>
               </table>
             </div>
+            <!-- Secondary Stats -->
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -207,7 +210,7 @@
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('stat', stat)">
-                    <th scope="row"><span class="d-none d-lg-inline">{{ translate(key) }} </span><span class="badge badge-primary">{{ translate("_"+key) }}</span></th>
+                    <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
                     <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
                     <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
@@ -217,7 +220,9 @@
               </table>
             </div>
           </div>
+          <!-- Skills -->
           <div class="row pagebreak">
+            <!-- Basic Skills -->
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -233,7 +238,7 @@
                     data-placement="bottom"
                     data-html="true"
                     v-bind:title="getTooltip('skill', skill)">
-                    <th scope="row">{{ translate(key) }}</th>
+                    <th scope="row">{{ translate(key) }} <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
                     <td style="min-width: 100px">
                       <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
                       <div class="progress d-print-none">
@@ -245,6 +250,7 @@
                 </tbody>
               </table>
             </div>
+            <!-- Advanced Skills -->
             <div class="col-12 col-md-6">
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -260,7 +266,7 @@
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('skill', skill)">
-                    <th scope="row">{{ translate(key) }}</th>
+                    <th scope="row">{{ translate(key) }} <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
                     <td style="min-width: 100px">
                       <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'">
                       <div class="progress d-print-none">
@@ -283,7 +289,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(talent, key) in getChunk(orderedObject(character.talents), 4, index)" data-toggle="tooltip" data-placement="bottom" data-html="true" v-bind:title="translate(key+'_desc')">
-                    <th scope="row"><span >{{ translate(key) }}</button></th>
+                    <th scope="row">{{ translate(key) }} <sup class="d-none d-print-inline" v-if="talent.id >=0">{{ talent.id }}</sup></th>
                     <td style="width: 50px">
                       <img src="static/black.jpg" class="d-none d-print-block progress" v-bind:style="'width: '+ (100 * talent.current) + '%'">
                       <div class="progress d-print-none">
@@ -369,8 +375,8 @@
                     tooltip += "<u>" +  this.$data.translations[this.$data.lang]["talents"] + "</u><br>"
                     for(i in stat.talents) {
                         var talent = stat.talents[i]
-                        var talent_name = this.$data.translations[this.$data.lang][talent]
-                        var talent_desc = this.$data.translations[this.$data.lang][talent + "_desc"]
+                        var talent_name = this.$data.translations[this.$data.lang][talent.name]
+                        var talent_desc = this.$data.translations[this.$data.lang][talent.name + "_desc"]
                         talent_desc = talent_desc.replace(/([+-]?[0-9]+[%]?)/, function(a, b){
                             return '<b>' + b + '</b>';
                         })

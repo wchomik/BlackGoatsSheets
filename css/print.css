@@ -1,8 +1,28 @@
 @media print {
-    .pagebreak { page-break-before: always; }
+    
+    .pagebreak {
+        page-break-before: always;
+        page-break-inside: avoid;
+    }
+
+    .light {
+        color: #000 !important;
+    }
+    
+    .text-warning {
+        color: #f0ad4e !important;
+    }
+
+    body {
+        color: #000000;
+    }
+
+    .table {
+        color: #000000;
+    }
 }
 @page {
-    size:A4 landscape;
+    size:A3 portrait;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;

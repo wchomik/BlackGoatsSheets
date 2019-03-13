@@ -283,19 +283,25 @@ function process_character_sheet(character) {
     if(!("talents" in character)) {
         character.talents = {}
     }
+    var talent_id = 1;
     for(var talent_name in talents) {
         var current = 0;
         if(talent_name in character.talents) {
             current = 1;
             talents[talent_name].influence.forEach(function(path){
                 let stat = jspath_ref(character, path)
-                "talents" in stat ? stat.talents.push(talent_name) : stat.talents = [talent_name]
+                var talent = {
+                    "id": talent_id,
+                    "name": talent_name
+                }
+                "talents" in stat ? stat.talents.push(talent) : stat.talents = [talent]
                 stat.starting += "mod" in talents[talent_name] ? talents[talent_name].mod : 0
             });
         }
         
         character.talents[talent_name] = {
-            "current": current
+            "current": current,
+            "id": current >= 1 ? talent_id++ : -1
         }
     }
 
