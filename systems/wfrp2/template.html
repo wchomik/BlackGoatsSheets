@@ -95,7 +95,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">{{ translate('crowns') }}</th><td scope="col">{{ ('coins' in character && 'crowns' in character.coins) ? character.coins.crowns : 0 }}</td>
+                    <th scope="row">{{ translate('crowns') }}</th><td scope="col">{{ ('coins' in character && 'crowns' in character.coins) ? character.coins.crowns : 0 }}</th>
                   </tr><tr>
                     <th scope="row">{{ translate('shillings') }}</th><td scope="col">{{ ('coins' in character && 'shillings' in character.coins) ? character.coins.shillings : 0 }}</td>
                   </tr><tr>
@@ -186,7 +186,7 @@
                     <td>{{stat.starting}}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : "+" + stat.advance }}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : stat.taken + "/" + (stat.advance/5)}}</td>
-                    <td>{{stat.current}}</td>
+                    <td>{{stat.current}}{{ "potential" in stat && stat.potential!=0 ? " (+"+stat.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -214,7 +214,7 @@
                     <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
                     <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
                     <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
-                    <td>{{ stat.current }}</td>
+                    <td>{{ stat.current }}{{ "potential" in stat && stat.potential!=0 ? " (+"+stat.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -245,7 +245,7 @@
                         <div class="progress-bar" class="d-print-none" role="progressbar" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'"v-bind:aria-valuenow="skill.taken" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </td>
-                    <td class="min">{{ skill.current }}</td>
+                    <td class="min">{{ skill.current + ("starting" in skill ? skill.starting : 0) }}{{ "potential" in skill && skill.potential!=0 ? " (+"+skill.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -273,7 +273,7 @@
                         <div class="progress-bar" role="progressbar" v-bind:style="'width: '+ (100 / 3 * skill.taken) + '%'" v-bind:aria-valuenow="skill.taken" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </td>
-                    <td class="min">{{ skill.current }}</td>
+                    <td class="min">{{ skill.current + ("starting" in skill ? skill.starting : 0) }}{{ "potential" in skill && skill.potential!=0 ? " (+"+skill.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
               </table>

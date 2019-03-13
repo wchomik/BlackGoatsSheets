@@ -19,17 +19,43 @@ function process_character_sheet(character) {
     
     var talents = {
         "acute_hearing": {
-            "influence": ["skills|basic|perception"],
-            "value": 20
+            "influence": [
+                {
+                    "path": "skills|basic|perception",
+                    "potential": 20
+                }
+            ]
         },
         "aethyric_attunement": {
-            "influence": ["skills|advanced|channelling", "skills|advanced|magical_sense"]
+            "influence": [
+                {
+                    "path": "skills|advanced|channelling",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|magical_sense",
+                    "mod": 10
+                }
+            ]
         },
         "alley_cat": {
-            "influence": ["skills|basic|concealment", "skills|basic|silent_move"]
+            "influence": [
+                {
+                    "path": "skills|basic|concealment",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|silent_move",
+                    "potential": 10
+                }
+            ]
         },
         "ambidextrous": {
-            "influence": ["stats|main|weapon", "stats|main|ballistic"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon"
+                },{
+                    "path": "stats|main|ballistic"
+                }
+            ]
         },
         "arcane_lore": {
             "influence": []
@@ -38,14 +64,34 @@ function process_character_sheet(character) {
             "influence": []
         },
         "artistic": {
-            "influence": ["skills|basic|evaluate", "skills|basic|trade"]
+            "influence": [
+                {
+                    "path": "skills|basic|evaluate",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|trade_artist",
+                    "mod": 20
+                }
+            ]
         },
         "contortionist": {
-            "influence": ["skills|advanced|performer", "stats|main|agility"]
+            "influence": [
+                {
+                    "path": "skills|advanced|performer",
+                    "potential": 10
+                },{
+                    "path": "stats|main|agility",
+                    "potential": 20
+                }
+            ]
         },
         "coolheaded": {
-            "influence": ["stats|main|will"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|will",
+                    "mod": 5
+                }
+            ],
         },
         "dark_lore": {
             "influence": []
@@ -54,7 +100,15 @@ function process_character_sheet(character) {
             "influence": []
         },
         "dealmaker": {
-            "influence": ["skills|basic|evaluate", "skills|basic|haggle"]
+            "influence": [
+                {
+                    "path": "skills|basic|evaluate",
+                    "mod": 10
+                },{
+                    "path": "skills|basic|haggle",
+                    "mod": 10
+                }
+            ]
         },
         "disarm": {
             "influence": []
@@ -63,42 +117,121 @@ function process_character_sheet(character) {
             "influence": []
         },
         "dwarfcraft": {
-            "influence": ["skills|advanced|trade"]
+            "influence": [
+                {
+                    "path": "skills|advanced|trade_armourer",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_brewer",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_gem_cutter",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_gunsmith",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_miner",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_smith",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_stoneworker",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|trade_weaponsmith",
+                    "mod": 10
+                }
+            ]
         },
         "etiquette": {
-            "influence": ["skills|basic|charm", "skills|basic|gossip"]
+            "influence": [
+                {
+                    "path": "skills|basic|charm",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|gossip",
+                    "potential": 10
+                }
+            ]
         },
         "excellent_vision": {
-            "influence": ["skills|basic|perception", "skills|advanced|lip_reading"]
+            "influence": [
+                {
+                    "path": "skills|basic|perception",
+                    "potential": 10
+                },{
+                    "path": "skills|advanced|lip_reading",
+                    "potential": 10
+                }
+            ]
         },
         "fast_hands": {
-            "influence": ["stats|main|weapon"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon",
+                    "potential": 20
+                }
+            ]
         },
         "fearless": {
             "influence": []
         },
         "flee": {
-            "influence": ["stats|secondary|movement"]
+            "influence": [
+                {
+                    "path": "stats|secondary|movement",
+                    "potential": 1
+                }
+            ]
         },
         "fleet_footed": {
-            "influence": ["stats|secondary|movement"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|secondary|movement",
+                    "mod": 5
+                }
+            ],
         },
         "flier": {
-            "influence": ["stats|secondary|movement"]
+            "influence": [
+                {
+                    "path": "stats|secondary|movement"
+                }
+            ]
         },
         "frenzy": {
-            "influence": ["stats|main|weapon", "stats|main|will", "stats|main|strength", "stats|main|intelligence"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon"
+                },{
+                    "path": "stats|main|will"
+                },{
+                    "path": "stats|main|strength"
+                },{
+                    "path": "stats|main|intelligence"
+                }
+            ]
         },
         "frightening": {
             "influence": []
         },
         "grudgeborn_fury": {
-            "influence": ["stats|main|weapon"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon",
+                    "potential": 5
+                }
+            ]
         },
         "hardy": {
-            "influence": ["stats|secondary|wounds"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|secondary|wounds",
+                    "mod": 5
+                }
+            ],
         },
         "hedge_magic": {
             "influence": []
@@ -107,48 +240,116 @@ function process_character_sheet(character) {
             "influence": []
         },
         "keen_senses": {
-            "influence": ["skills|basic|perception"]
+            "influence": [
+                {
+                    "path": "skills|basic|perception",
+                    "mod": 20
+                }
+            ]
         },
         "lesser_magic": {
             "influence": []
         },
         "lightning_parry": {
-            "influence": ["stats|secondary|attacks"]
+            "influence": [
+                {
+                    "path": "stats|secondary|attacks"
+                }
+            ]
         },
         "lightning_reflexes": {
-            "influence": ["stats|main|agility"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|agility",
+                    "mod": 5
+                }
+            ],
         },
         "linguistics": {
-            "influence": ["skills|advanced|readwrite", "skills|advanced|speak_language.*"]
+            "influence": [
+                {
+                    "path": "skills|advanced|readwrite",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|speak_language.*",
+                    "mod": 10
+                }
+            ]
         },
         "luck": {
-            "influence": ["stats|secondary|fate_points"]
+            "influence": [
+                {
+                    "path": "stats|secondary|fate_points"
+                }
+            ]
         },
         "marksman": {
-            "influence": ["stats|main|ballistic"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|ballistic",
+                    "mod": 5
+                }
+            ],
         },
         "master_gunner": {
             "influence": []
         },
         "master_orator": {
-            "influence": ["skills|basic|charm"]
+            "influence": [
+                {
+                    "path": "skills|basic|charm"
+                }
+            ]
         },
         "meditation": {
             "influence": []
         },
         "menacing": {
-            "influence": ["skills|basic|intimidate", "skills|advanced|torture"]
+            "influence": [
+                {
+                    "path": "skills|basic|intimidate",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|torture",
+                    "mod": 10
+                }
+            ]
         },
         "mighty_missile": {
             "influence": []
         },
         "mighty_shot": {
-            "influence": []
+            "influence": [
+                {
+                    "path": "stats|main|ballistic"
+                }
+            ]
         },
         "mimic": {
-            "influence": ["skills|basic|disguise", "skills|advanced|performer", "skills|advanced|speak_language.*"]
+            "influence": [
+                {
+                    "path": "skills|basic|disguise",
+                    "potential": 10
+                },{
+                    "path": "skills|advanced|speak_language.*",
+                    "potential": 10
+                },{
+                    "path": "skills|advanced|performer_actor",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|performer_clown",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|performer_comedian",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|performer_jester",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|performer_storyteller",
+                    "mod": 10
+                }
+            ]
         },
         "natural_weapons": {
             "influence": []
@@ -157,13 +358,22 @@ function process_character_sheet(character) {
             "influence": []
         },
         "orientation": {
-            "influence": ["skills|advanced|navigation"]
+            "influence": [
+                {
+                    "path": "skills|advanced|navigation",
+                    "mod": 10
+                }
+            ]
         },
         "petty_magic": {
             "influence": []
         },
         "public_speaking": {
-            "influence": ["skills|basic|charm"]
+            "influence": [
+                {
+                    "path": "skills|basic|charm"
+                }
+            ]
         },
         "quick_draw": {
             "influence": []
@@ -172,32 +382,84 @@ function process_character_sheet(character) {
             "influence": []
         },
         "resistance_to_chaos": {
-            "influence": ["stats|main|will"]
+            "influence": [
+                {
+                    "path": "stats|main|will",
+                    "potential": 10
+                }
+            ]
         },
         "resistance_to_disease": {
-            "influence": ["stats|main|toughness"]
+            "influence": [
+                {
+                    "path": "stats|main|toughness",
+                    "potential": 10
+                }
+            ]
         },
         "resistance_to_magic": {
-            "influence": ["stats|main|will"]
+            "influence": [
+                {
+                    "path": "stats|main|will",
+                    "potential": 10
+                }
+            ]
         },
         "resistance_to_poison": {
-            "influence": ["stats|main|toughness"]
+            "influence": [
+                {
+                    "path": "stats|main|toughness",
+                    "potential": 10
+                }
+            ]
         },
         "rover": {
-            "influence": ["skills|basic|concealment", "skills|basic|silent_move"]
+            "influence": [
+                {
+                    "path": "skills|basic|concealment",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|silent_move",
+                    "potential": 10
+                }
+            ]
         },
         "savvy": {
-            "influence": ["stats|main|intelligence"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|intelligence",
+                    "mod": 5
+                }
+            ],
         },
         "schemer": {
-            "influence": ["skills|basic|charm", "stats|main|will"]
+            "influence": [
+                {
+                    "path": "skills|basic|charm",
+                    "potential": 10
+                },{
+                    "path": "stats|main|will",
+                    "potential": 10
+                }
+            ]
         },
         "seasoned_traveller": {
-            "influence": ["skills|advanced|common_knowledge.*", "skills|advanced|speak_language.*"]
+            "influence": [
+                {
+                    "path": "skills|advanced|common_knowledge.*",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|speak_language.*",
+                    "mod": 10
+                }
+            ]
         },
         "sharpshooter": {
-            "influence": ["stats|main|ballistic"]
+            "influence": [
+                {
+                    "path": "stats|main|ballistic"
+                }
+            ]
         },
         "sixth_sense": {
             "influence": []
@@ -206,13 +468,31 @@ function process_character_sheet(character) {
             "influence": []
         },
         "stouthearted": {
-            "influence": ["stats|main|will"]
+            "influence": [
+                {
+                    "path": "stats|main|will",
+                    "potential": 10
+                }
+            ]
         },
         "street_fighting": {
-            "influence": ["stats|main|weapon"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon",
+                    "potential": 10
+                }
+            ]
         },
         "streetwise": {
-            "influence": ["skills|basic|charm", "skills|basic|gossip"]
+            "influence": [
+                {
+                    "path": "skills|basic|charm",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|gossip",
+                    "potential": 10
+                }
+            ]
         },
         "strike_mighty_blow": {
             "influence": []
@@ -227,20 +507,44 @@ function process_character_sheet(character) {
             "influence": []
         },
         "sturdy": {
-            "influence": ["stats|secondary|movement"]
+            "influence": [
+                {
+                    "path": "stats|secondary|movement"
+                }
+            ]
         },
         "suave": {
-            "influence": ["stats|main|fellowship"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|fellowship",
+                    "mod": 5
+                }
+            ],
         },
         "sure_shot": {
             "influence": []
         },
         "surgery": {
-            "influence": ["skills|advanced|heal"]
+            "influence": [
+                {
+                    "path": "skills|advanced|heal",
+                    "mod": 10
+                }
+            ]
         },
         "super_numerate": {
-            "influence": ["skills|basic|perception", "skills|basic|gamble", "skills|advanced|navigation"]
+            "influence": [
+                {
+                    "path": "skills|basic|perception",
+                    "potential": 20
+                },{
+                    "path": "skills|basic|gamble",
+                    "mod": 10
+                },{
+                    "path": "skills|advanced|navigation",
+                    "mod": 10
+                }
+            ]
         },
         "swashbuckler": {
             "influence": []
@@ -249,13 +553,34 @@ function process_character_sheet(character) {
             "influence": []
         },
         "trapfinder": {
-            "influence": ["skills|basic|perception", "skills|advanced|pick_lock"]
+            "influence": [
+                {
+                    "path": "skills|basic|perception",
+                    "potential": 10
+                },{
+                    "path": "skills|advanced|pick_lock",
+                    "potential": 10
+                }
+            ]
         },
         "trick_riding": {
-            "influence": ["skills|advanced|ride"]
+            "influence": [
+                {
+                    "path": "skills|advanced|ride",
+                    "mod": 10
+                }
+            ]
         },
         "tunnel_rat": {
-            "influence": ["skills|basic|concealment", "skills|basic|silent_move"]
+            "influence": [
+                {
+                    "path": "skills|basic|concealment",
+                    "potential": 10
+                },{
+                    "path": "skills|basic|silent_move",
+                    "potential": 10
+                }
+            ]
         },
         "undead": {
             "influence": []
@@ -264,19 +589,39 @@ function process_character_sheet(character) {
             "influence": []
         },
         "very_resilient": {
-            "influence": ["stats|main|toughness"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|toughness",
+                    "mod": 5
+                }
+            ],
         },
         "very_strong": {
-            "influence": ["stats|main|strength"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|strength",
+                    "mod": 5
+                }
+            ],
         },
         "warrior_born": {
-            "influence": ["stats|main|weapon"],
-            "mod": 5
+            "influence": [
+                {
+                    "path": "stats|main|weapon",
+                    "mod": 5
+                }
+            ],
         },
         "wrestling": {
-            "influence": ["stats|main|weapon", "stats|main|strength"]
+            "influence": [
+                {
+                    "path": "stats|main|weapon",
+                    "potential": 10
+                },{
+                    "path": "stats|main|strength",
+                    "potential": 10
+                }
+            ]
         }
     }
 
@@ -288,14 +633,20 @@ function process_character_sheet(character) {
         var current = 0;
         if(talent_name in character.talents) {
             current = 1;
-            talents[talent_name].influence.forEach(function(path){
-                let stat = jspath_ref(character, path)
-                var talent = {
-                    "id": talent_id,
-                    "name": talent_name
+            talents[talent_name].influence.forEach(function(influence){
+                var mod = "mod" in influence ? influence.mod : 0
+                var potential = "potential" in influence ? influence.potential : 0
+
+                let stats = jspath_ref(character, influence.path)
+                for(var stat in stats) {
+                    var talent = {
+                        "id": talent_id,
+                        "name": talent_name
+                    }
+                    "talents" in stats[stat] ? stats[stat].talents.push(talent) : stats[stat].talents = [talent]
+                    stats[stat].starting = "starting" in stats[stat] ? stats[stat].starting + mod : mod
+                    stats[stat].potential = "potential" in stats[stat] ? Math.max(stats[stat].potential, potential) : potential
                 }
-                "talents" in stat ? stat.talents.push(talent) : stat.talents = [talent]
-                stat.starting += "mod" in talents[talent_name] ? talents[talent_name].mod : 0
             });
         }
         
