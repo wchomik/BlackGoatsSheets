@@ -45,6 +45,16 @@ img {
     height: 20px;
 }
 
+.table-disabled {
+    background: repeating-linear-gradient(
+    -60deg,
+    #32363b,
+    #32363b 10px,
+    #272B30 10px,
+    #272B30 20px
+    );
+}
+
 .table-head{
     border-radius: 50px 50px 0px 0px;
     border: 1px solid rgba(0, 0, 0, 0.6);

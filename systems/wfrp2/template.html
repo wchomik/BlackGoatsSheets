@@ -212,8 +212,8 @@
                   v-bind:title="getTooltip('stat', stat)">
                     <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
                     <td>{{stat.starting}}</td>
-                    <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : "+" + stat.advance }}</td>
-                    <td v-bind:class="{ 'table-light': stat.advance == 0 }">{{ stat.advance == 0 ? "" : stat.taken + "/" + (stat.advance/5)}}</td>
+                    <td v-bind:class="{ 'table-disabled': stat.advance == 0 }">{{ stat.advance == 0 ? "" : "+" + stat.advance }}</td>
+                    <td v-bind:class="{ 'table-disabled': stat.advance == 0 }">{{ stat.advance == 0 ? "" : stat.taken + "/" + (stat.advance/5)}}</td>
                     <td>{{stat.current}}{{ "potential" in stat && stat.potential!=0 ? " (+"+stat.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
@@ -242,9 +242,9 @@
                   data-html="true"
                   v-bind:title="getTooltip('stat', stat)">
                     <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
-                    <td v-bind:class="{ 'table-light': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
-                    <td v-bind:class="{ 'table-light': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
-                    <td v-bind:class="{ 'table-light': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
+                    <td v-bind:class="{ 'table-disabled': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
+                    <td v-bind:class="{ 'table-disabled': stat.advance == 'disabled' }">{{ stat.advance == 'disabled' ? '' : stat.advance }}</td>
+                    <td v-bind:class="{ 'table-disabled': stat.taken == 'disabled' }">{{ stat.taken == 'disabled' ? '' : stat.taken }}</td>
                     <td>{{ stat.current }}{{ "potential" in stat && stat.potential!=0 ? " (+"+stat.potential+")" : "" }}</td>
                   </tr>
                 </tbody>
