@@ -1,6 +1,6 @@
 <div id="bgsappid" class="container-fluid">
   <h1 class="d-print-none"><a v-bind:href="repo_url">{{ name }}</a></h1>
-  <ul class="nav nav-pills mb-3 d-print-none" id="pills-tab" role="tablist">
+  <ul class="nav nav-pills mb-3 d-print-none" id="tools-tab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="v-panes-character-sheets-tab" data-toggle="pill" href="#v-panes-character-sheets" role="tab" aria-controls="v-panes-character-sheets" aria-selected="true">{{ translate('character-sheets') }}</a>
     </li>
@@ -10,18 +10,17 @@
   </ul>
   <div class="tab-content" id="v-panes-tabContent">
     <div class="tab-pane fade show active" id="v-panes-character-sheets" role="tabpanel" aria-labelledby="v-panes-character-sheets-tab">          
-      <nav class="d-print-none">
-        <div class="nav nav-pills" id="nav-tab" role="tablist">
-          <a v-for="(character, index) in characters"
-            class="nav-item nav-link"
+      <ul class="nav nav-pills mb-3 d-print-none" id="character-tab" role="tablist">
+        <li v-for="(character, index) in characters" class="nav-item">
+          <a class="nav-item nav-link"
             v-bind:class="{ active: index === 0 }"
             aria-selected="index === 0 ? 'true' : 'false'"
             v-bind:id="'nav-tab-' + character.id"
             v-bind:href="'#nav-' + character.id"
             v-bind:aria-controls="'nav-' + character.id"
             data-toggle="pill" role="tab">{{ character.name }}</a>
-        </div>
-      </nav>
+        </li>
+      </ul>
       <div class="tab-content" id="nav-tabContent">
         <div v-for="(character, index) in characters"
           class="tab-pane fade"
@@ -32,7 +31,7 @@
           <div class="row">
             <div class="col">
               <div class="continer table-head">
-                <img src="static/barbute.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/barbute.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
@@ -50,7 +49,7 @@
             </div>
             <div class="col">
               <div class="continer table-head">
-                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/scroll-unfurled.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
@@ -67,7 +66,7 @@
             </div>
             <div class="col">
               <div class="continer table-head">
-                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/scroll-unfurled.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
@@ -86,7 +85,7 @@
           <div v-if="character.background" class="row">
             <div class="col">
               <div class="continer table-head">
-                <img src="static/scroll-unfurled.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/scroll-unfurled.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-bordered table-striped">
                 <tbody>
@@ -100,7 +99,7 @@
           <div class="row pagebreak">
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/coins.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/coins.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -119,7 +118,7 @@
                 </tbody>
               </table>
               <div class="continer table-head">
-                <img src="static/saber-and-pistol.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/saber-and-pistol.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -146,7 +145,7 @@
                 </tbody>
               </table>
               <div class="continer table-head">
-                <img src="static/breastplate.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/breastplate.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -169,7 +168,7 @@
             </div>
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/knapsack.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/knapsack.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                   <thead>
@@ -192,7 +191,7 @@
             <!-- Primary Stats -->
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/anatomy.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/anatomy.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -223,7 +222,7 @@
             <!-- Secondary Stats -->
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/muscle-up.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/muscle-up.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -257,7 +256,7 @@
             <!-- Basic Skills -->
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/gift-of-knowledge.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/gift-of-knowledge.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -287,7 +286,7 @@
             <!-- Advanced Skills -->
             <div class="col-12 col-md-6">
               <div class="continer table-head">
-                <img src="static/enlightenment.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/enlightenment.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
@@ -318,7 +317,7 @@
           <div class="row pagebreak">
             <div class="col-6 col-md-3" v-for="index in 4" :key="index">
               <div class="continer table-head">
-                <img src="static/aura.png" class="icon mx-auto d-block" alt="icon">
+                <img src="static/aura.svg" class="icon mx-auto d-block" alt="icon">
               </div>
               <table class="shadow p-3 mb-5 bg-black rounded table table-sm table-bordered table-striped">
                 <thead>
