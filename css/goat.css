@@ -58,9 +58,18 @@ img {
 .table-head{
     border-radius: 50px 50px 0px 0px;
     border: 1px solid rgba(0, 0, 0, 0.6);
-    border-bottom: none;
-    background-color: rgba(0, 0, 0, 0.15);
-} 
+    /* border-bottom: none; */
+    /* background-color: rgba(0, 0, 0, 0.15); */
+    background-color: rgb(40, 0, 0); /*for compatibility with older browsers*/
+    background-image: linear-gradient(rgb(40, 0, 0),red);
+    
+    box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 10px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+}
 
 table th:first-child{
     border-radius: 10px 0 0 10px !important;
@@ -68,4 +77,30 @@ table th:first-child{
 
 table th:last-child{
     border-radius: 0 10px 10px 0 !important;
+}
+
+.glass{
+	/* background styles */
+	position: relative;
+	display: inline-block;
+	padding: 15px 25px;
+	background-color: darkred; /*for compatibility with older browsers*/
+	background-image: linear-gradient(darkred,red);
+
+	/* text styles */
+	text-decoration: none;
+	color: #fff;
+	font-size: 25px;
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+.glass:after{
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: calc(100% - 4px);
+	height: 50%;
+	background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
 }
