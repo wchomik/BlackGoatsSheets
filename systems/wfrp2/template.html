@@ -134,7 +134,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(weapon, key) in character.weapons">
-                    <th scope="row" class="small">{{ weapon.name }}</th>
+                    <th scope="row" class="small">{{ weapon.name }} <sup class="d-none d-print-inline" v-if="'id' in weapon && weapon.id >=0">{{ weapon.id }}</sup></th>
                     <td scope="col" class="small">{{ translate(weapon.group) }}</td>
                     <td scope="col" class="small">{{ weapon.damage }} ({{ weapon.range }})</td>
                     <td scope="col" class="small"><span v-for="(quality, key) in weapon.qualities">{{ (key > 0 ? ", " : "") + translate(quality) }}</span></td>
@@ -156,7 +156,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(piece, key) in character.armour">
-                    <th scope="row">{{ piece.name }}</th>
+                    <th scope="row">{{ piece.name }} <sup class="d-none d-print-inline" v-if="'id' in piece && piece.id >=0">{{ piece.id }}</sup></th>
                     <td scope="col"><span v-for="(location, key) in piece.locations">{{ (key > 0 ? ", " : "") + translate(location) }}</span></td>
                     <td scope="col">{{ piece.ap }}</td>
                     <td scope="col" class="small">{{ piece.desc }}</td>
@@ -177,7 +177,7 @@
                   </thead>
                   <tbody>
                     <tr v-for="(item, key) in character.inventory">
-                      <th scope="row">{{ item.name }}</th>
+                      <th scope="row">{{ item.name }} <sup class="d-none d-print-inline" v-if="'id' in item && item.id >=0">{{ item.id }}</sup></th>
                       <td scope="col" class="small">{{ item.desc }}</td>
                     </tr>
                   </tbody>
@@ -202,13 +202,18 @@
                 </thead>
                 <tbody>
                   <tr v-for="(stat, key) in character.stats.main"
-                  v-bind:class="[ 'talents' in stat ? 'text-warning' : '' ]"
+                  v-bind:class="[ ('talents' in stat) || ('equipement' in stat) ? 'text-warning' : '' ]"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('stat', stat)">
-                    <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
-                    <td>{{stat.starting}}</td>
+                    <th scope="row">
+                      <span class="badge badge-primary">{{ translate("_"+key) }}</span>
+                      <span class="d-none d-lg-inline">{{ translate(key) }}</span>
+                      <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", t": "t") + talent.id }}</sup>
+                      <sup class="d-none d-print-inline" v-for="(item, key) in stat.equipement">{{ (key>0 ? ", e": "e") + item.id }}</sup>
+                    </th>
+                    <td>{{stat.starting + stat.bonus}}</td>
                     <td v-if="stat.advance == 0" v-bind:class="{ 'table-disabled': stat.advance == 0 }"></td>
                     <td v-if="stat.advance != 0">
                       <span v-for="lvl in (stat.advance/5)" :key="lvl">
@@ -237,13 +242,18 @@
                 </thead>
                 <tbody>
                   <tr v-for="(stat, key) in character.stats.secondary"
-                  v-bind:class="[ 'talents' in stat ? 'text-warning' : '' ]"
+                  v-bind:class="[ ('talents' in stat) || ('equipement' in stat) ? 'text-warning' : '' ]"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('stat', stat)">
-                    <th scope="row"><span class="badge badge-primary">{{ translate("_"+key) }}</span> <span class="d-none d-lg-inline">{{ translate(key) }}</span> <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
-                    <td v-bind:class="{ 'table-disabled': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : stat.starting }}</td>
+                    <th scope="row">
+                      <span class="badge badge-primary">{{ translate("_"+key) }}</span>
+                      <span class="d-none d-lg-inline">{{ translate(key) }}</span>
+                      <sup class="d-none d-print-inline" v-for="(talent, key) in stat.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup>
+                      <sup class="d-none d-print-inline" v-for="(item, key) in stat.equipement">{{ (key>0 ? ", e": "e") + item.id }}</sup>
+                    </th>
+                    <td v-bind:class="{ 'table-disabled': stat.starting == 'disabled' }">{{ stat.starting == 'disabled' ? '' : (stat.starting + stat.bonus) }}</td>
                     <td v-if="stat.no_advance || stat.advance == 0" class="table-disabled"></td>
                     <td v-if="!stat.no_advance && stat.advance > 0">
                       <span v-if="stat.advance > 0">
@@ -281,12 +291,16 @@
                 </thead>
                 <tbody>
                   <tr v-for="(skill, key) in orderedObject(character.skills.basic)"
-                    v-bind:class="[ 'talents' in skill ? 'text-warning' : '' ]"
+                    v-bind:class="[ ('talents' in skill) || ('equipement' in skill) ? 'text-warning' : '' ]"
                     data-toggle="tooltip"
                     data-placement="bottom"
                     data-html="true"
                     v-bind:title="getTooltip('skill', skill)">
-                    <th scope="row">{{ translate(key) }} <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
+                    <th scope="row">
+                      {{ translate(key) }}
+                      <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup>
+                      <sup class="d-none d-print-inline" v-for="(item, key) in skill.equipement">{{ (key>0 ? ", e": "e") + item.id }}</sup>
+                    </th>
                     <td style="width: 130px">
                       <span v-for="lvl in 3" :key="lvl">
                         <img v-if="skill.taken > lvl-1" src="static/wax-seal.png" class="seal d-inline">
@@ -312,12 +326,15 @@
                 </thead>
                 <tbody>
                   <tr v-for="(skill, key) in orderedObject(character.skills.advanced)"
-                  v-bind:class="[ 'talents' in skill ? 'text-warning' : '' ]"
+                  v-bind:class="[ ('talents' in skill) || ('equipement' in skill) ? 'text-warning' : '' ]"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   data-html="true"
                   v-bind:title="getTooltip('skill', skill)">
-                    <th scope="row">{{ translate(key) }} <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup></th>
+                    <th scope="row">{{ translate(key) }}
+                      <sup class="d-none d-print-inline" v-for="(talent, key) in skill.talents">{{ (key>0 ? ", ": "") + talent.id }}</sup>
+                      <sup class="d-none d-print-inline" v-for="(item, key) in skill.equipement">{{ (key>0 ? ", e": "e") + item.id }}</sup>
+                    </th>
                     <td style="width: 130px">
                       <span v-for="lvl in 3" :key="lvl">
                         <img v-if="skill.taken > lvl-1" src="static/wax-seal.png" class="seal d-inline">
@@ -343,7 +360,10 @@
                 </thead>
                 <tbody>
                   <tr v-for="(talent, key) in getChunk(orderedObject(character.talents), 4, index)" data-toggle="tooltip" data-placement="bottom" data-html="true" v-bind:title="translate(key+'_desc')">
-                    <th scope="row" class="small">{{ translate(key) }} <sup class="d-none d-print-inline" v-if="talent.id >=0">{{ talent.id }}</sup></th>
+                    <th scope="row" class="small">
+                      {{ translate(key) }}
+                      <sup class="d-none d-print-inline" v-if="talent.id >=0">{{ talent.id }}</sup>
+                    </th>
                     <td style="width: 45px">
                       <img v-if="talent.current > 0" src="static/wax-seal.png" class="seal d-inline"><img v-if="talent.current <= 0" src="static/circle.png" class="seal-place d-inline">
                     </td>
@@ -426,15 +446,30 @@
                     tooltip += "<u>" +  this.$data.translations[this.$data.lang]["talents"] + "</u><br>"
                     for(i in stat.talents) {
                         var talent = stat.talents[i]
-                        var talent_name = this.$data.translations[this.$data.lang][talent.name]
-                        var talent_desc = this.$data.translations[this.$data.lang][talent.name + "_desc"]
-                        talent_desc = talent_desc.replace(/([+-]?[0-9]+[%]?)/, function(a, b){
+                        var name = this.$data.translations[this.$data.lang][talent.name]
+                        var desc = this.$data.translations[this.$data.lang][talent.name + "_desc"]
+                        desc = desc.replace(/([+-]?[0-9]+[%]?)/, function(a, b){
                             return '<b>' + b + '</b>';
                         })
                         if(cnt++ > 0) {
                           tooltip += "<br>"
                         }
-                        tooltip += "<b>" + talent_name + "</b>: <em>" + talent_desc + "</em>"
+                        tooltip += "<b>" + name + "</b>: <em>" + desc + "</em>"
+                    }
+                }
+                if("equipement" in stat) {
+                    tooltip += "<u>" +  this.$data.translations[this.$data.lang]["inventory"] + "</u><br>"
+                    for(i in stat.equipement) {
+                        var item = stat.equipement[i]
+                        var name = item.name
+                        var desc = item.desc
+                        desc = desc.replace(/([+-]?[0-9]+[%]?)/, function(a, b){
+                            return '<b>' + b + '</b>';
+                        })
+                        if(cnt++ > 0) {
+                          tooltip += "<br>"
+                        }
+                        tooltip += "<b>" + name + "</b>: <em>" + desc + "</em>"
                     }
                 }
                 return tooltip;

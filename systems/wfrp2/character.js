@@ -1,21 +1,90 @@
 
 
-function expand_skills(character) {
+function expand_character(character) {
     var skill_types = ["basic", "advanced"];
+
+    for(var statName in character.stats.main){
+        character.stats.main[statName].bonus = 0
+        character.stats.main[statName].potential = 0
+    }
+    for(var statName in character.stats.secondary){
+        character.stats.secondary[statName].bonus = 0
+        character.stats.secondary[statName].potential = 0
+    }
+
+    character.stats.secondary.strength_bonus = {
+        "starting": "disabled",
+        "advance": 0,
+        "taken": 0,
+        "no_advance": true,
+        "bonus": 0,
+        "potential": 0
+    };
+    character.stats.secondary.toughness_bonus = {
+        "starting": "disabled",
+        "advance": 0,
+        "taken": 0,
+        "no_advance": true,
+        "bonus": 0,
+        "potential": 0
+    };
+    character.stats.secondary.fortune_points = {
+        "starting": "disabled",
+        "advance": 0,
+        "taken": 0,
+        "no_advance": true,
+        "bonus": 0,
+        "potential": 0
+    };
+
+    character.stats.secondary.insanity_points.advance = 0;
+    character.stats.secondary.insanity_points.taken = 0;
+    character.stats.secondary.insanity_points.no_advance = true;
+    character.stats.secondary.fate_points.advance = 0;
+    character.stats.secondary.fate_points.taken = 0;
+    character.stats.secondary.fate_points.no_advance = true;
 
     for(var skill_type in skill_types) {
         for(var name in character.skills[skill_types[skill_type]]) {
             character.skills[skill_types[skill_type]][name] = {
-                "taken": name in character.skills[skill_types[skill_type]] ? character.skills[skill_types[skill_type]][name] : 0
+                "taken": name in character.skills[skill_types[skill_type]] ? character.skills[skill_types[skill_type]][name] : 0,
+                "bonus": 0,
+                "potential": 0
             }
         }
+    }
+}
+
+function calc_influence(character, influence_type, id, name, item) {
+    if("influence" in item){
+        item.influence.forEach(function(influence){
+            var mod = "mod" in influence ? influence.mod : 0
+            var potential = "potential" in influence ? influence.potential : 0
+
+            let stats = jspath_ref(character, influence.path)
+            for(var stat in stats) {
+                var thing = {
+                    "id": id,
+                    "name": name
+                }
+                if("desc" in item) {
+                    thing.desc = item.desc
+                }
+                influence_type in stats[stat] ? stats[stat][influence_type].push(thing) : stats[stat][influence_type] = [thing]
+                stats[stat].bonus += mod
+                stats[stat].potential += potential
+            }
+        })
+        return true
+    } else {
+        return false
     }
 }
 
 function process_character_sheet(character) {
     var skill_types = ["basic", "advanced"];
 
-    expand_skills(character);
+    expand_character(character);
     
     var talents = {
         "acute_hearing": {
@@ -279,7 +348,7 @@ function process_character_sheet(character) {
         "luck": {
             "influence": [
                 {
-                    "path": "stats|secondary|fate_points"
+                    "path": "stats|secondary|fortune_points"
                 }
             ]
         },
@@ -669,21 +738,7 @@ function process_character_sheet(character) {
         var current = 0;
         if(talent_name in character.talents) {
             current = 1;
-            talents[talent_name].influence.forEach(function(influence){
-                var mod = "mod" in influence ? influence.mod : 0
-                var potential = "potential" in influence ? influence.potential : 0
-
-                let stats = jspath_ref(character, influence.path)
-                for(var stat in stats) {
-                    var talent = {
-                        "id": talent_id,
-                        "name": talent_name
-                    }
-                    "talents" in stats[stat] ? stats[stat].talents.push(talent) : stats[stat].talents = [talent]
-                    stats[stat].starting = "starting" in stats[stat] ? stats[stat].starting + mod : mod
-                    stats[stat].potential = "potential" in stats[stat] ? Math.max(stats[stat].potential, potential) : potential
-                }
-            });
+            calc_influence(character, "talents", talent_id, talent_name, talents[talent_name])
         }
         
         character.talents[talent_name] = {
@@ -692,39 +747,39 @@ function process_character_sheet(character) {
         }
     }
 
+    var equipement_id = 1;
+    character.inventory.forEach(function(item){
+        if(calc_influence(character, "equipement", equipement_id, item.name, item)){
+            item.id = equipement_id++
+        }
+    })
+    character.armour.forEach(function(item){
+        if(calc_influence(character, "equipement", equipement_id, item.name, item)){
+            item.id = equipement_id++
+        }
+    })
+    character.weapons.forEach(function(item){
+        if(calc_influence(character, "equipement", equipement_id, item.name, item)){
+            item.id = equipement_id++
+        }
+    })
+
     for(var stat in character.stats.main) {
-        character.stats.main[stat].current = character.stats.main[stat].starting + 5 * Math.min(character.stats.main[stat].taken, character.stats.main[stat].advance)
+        character.stats.main[stat].current = character.stats.main[stat].starting + 5 * Math.min(character.stats.main[stat].taken, character.stats.main[stat].advance) + character.stats.main[stat].bonus
         character.stats.main[stat].no_advance = false
     }
     for(var stat in character.stats.secondary) {
-        if(["strength_bonus", "toughness_bonus", "insanity_points", "fate_points"].includes(stat)) {
+        if(["strength_bonus", "toughness_bonus", "insanity_points", "fate_points", "fortune_points"].includes(stat)) {
             continue
         } else {
-            character.stats.secondary[stat].current = character.stats.secondary[stat].starting + Math.min(character.stats.secondary[stat].taken, character.stats.secondary[stat].advance)
+            character.stats.secondary[stat].current = character.stats.secondary[stat].starting + Math.min(character.stats.secondary[stat].taken, character.stats.secondary[stat].advance) + character.stats.secondary[stat].bonus
             character.stats.secondary[stat].no_advance = false
         }
     }
 
-    character.stats.secondary.insanity_points.advance = 0;
-    character.stats.secondary.insanity_points.taken = 0;
-    character.stats.secondary.insanity_points.no_advance = true;
-    character.stats.secondary.fate_points.advance = 0;
-    character.stats.secondary.fate_points.taken = 0;
-    character.stats.secondary.fate_points.no_advance = true;
-    character.stats.secondary.strength_bonus = {
-        "current": parseInt(character.stats.main.strength.current / 10),
-        "starting": "disabled",
-        "advance": 0,
-        "taken": 0,
-        "no_advance": true
-    };
-    character.stats.secondary.toughness_bonus = {
-        "current": parseInt(character.stats.main.toughness.current / 10),
-        "starting": "disabled",
-        "advance": 0,
-        "taken": 0,
-        "no_advance": true
-    };
+    character.stats.secondary.strength_bonus.current = parseInt(character.stats.main.strength.current / 10) + character.stats.secondary.strength_bonus.bonus
+    character.stats.secondary.toughness_bonus.current = parseInt(character.stats.main.toughness.current / 10) + character.stats.secondary.strength_bonus.bonus
+    character.stats.secondary.fortune_points.current = parseInt(character.stats.secondary.fate_points.current) + character.stats.secondary.fortune_points.bonus
 
     var skills = {
         "animal_care": "stats|main|intelligence[current]",
@@ -883,7 +938,7 @@ function process_character_sheet(character) {
                 current = skill.value + (character.skills[skill_types[skill_type]][name].taken - 1) * 10
             }
 
-            character.skills[skill_types[skill_type]][name].current = current
+            character.skills[skill_types[skill_type]][name].current = current + character.skills[skill_types[skill_type]][name].bonus
         }
     }
     
