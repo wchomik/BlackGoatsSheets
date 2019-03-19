@@ -694,30 +694,36 @@ function process_character_sheet(character) {
 
     for(var stat in character.stats.main) {
         character.stats.main[stat].current = character.stats.main[stat].starting + 5 * Math.min(character.stats.main[stat].taken, character.stats.main[stat].advance)
+        character.stats.main[stat].no_advance = false
     }
     for(var stat in character.stats.secondary) {
         if(["strength_bonus", "toughness_bonus", "insanity_points", "fate_points"].includes(stat)) {
             continue
         } else {
             character.stats.secondary[stat].current = character.stats.secondary[stat].starting + Math.min(character.stats.secondary[stat].taken, character.stats.secondary[stat].advance)
+            character.stats.secondary[stat].no_advance = false
         }
     }
 
-    character.stats.secondary.insanity_points.advance = "disabled";
-    character.stats.secondary.insanity_points.taken = "disabled";
-    character.stats.secondary.fate_points.advance = "disabled";
-    character.stats.secondary.fate_points.taken = "disabled";
+    character.stats.secondary.insanity_points.advance = 0;
+    character.stats.secondary.insanity_points.taken = 0;
+    character.stats.secondary.insanity_points.no_advance = true;
+    character.stats.secondary.fate_points.advance = 0;
+    character.stats.secondary.fate_points.taken = 0;
+    character.stats.secondary.fate_points.no_advance = true;
     character.stats.secondary.strength_bonus = {
         "current": parseInt(character.stats.main.strength.current / 10),
         "starting": "disabled",
-        "advance": "disabled",
-        "taken": "disabled",
+        "advance": 0,
+        "taken": 0,
+        "no_advance": true
     };
     character.stats.secondary.toughness_bonus = {
         "current": parseInt(character.stats.main.toughness.current / 10),
         "starting": "disabled",
-        "advance": "disabled",
-        "taken": "disabled",
+        "advance": 0,
+        "taken": 0,
+        "no_advance": true
     };
 
     var skills = {

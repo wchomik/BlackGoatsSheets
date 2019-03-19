@@ -24,6 +24,10 @@
     .icon {
         filter: invert(100%);
     }
+
+    .seal-place {
+        filter: invert(100%);
+    }
 }
 @page {
     size:A3 portrait;
